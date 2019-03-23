@@ -5,11 +5,9 @@ $PublicPath = Resolve-Path "$PublicPath\..\public\";
 Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
     Context 'PSScriptAnalyzer Standard Rules' {
 		Import-Module PSScriptAnalyzer;
-        $ExcludeRules = @();
+        $ExcludeRules = @('PSUseSingularNouns');
 
-
-		$includeScripts = Get-ChildItem "$PublicPath" -Recurse -Include *.ps1
-		# -Exclude *Tests.ps1;
+		$includeScripts = Get-ChildItem "$PublicPath" -Recurse -Include *.ps1 -Exclude *Tests.ps1;
 
 	    foreach ($script in $includeScripts) {
 			[string]$scriptPath = $script.FullName;
@@ -30,7 +28,8 @@ Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
 				        ($Failures | Measure-Object).Count | Should Be 0
 			        }
 		        }
-		        else
+<#
+				else
 		        {
 			        # We still want it in the tests, but since it doesn't actually get tested we will skip
 			        It "Should pass $Rule" -Skip {
@@ -38,7 +37,7 @@ Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
 				        ($Failures | Measure-Object).Count | Should Be 0
 			        }
 		        }
-
+#>
 	        }
 	    }
 

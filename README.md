@@ -60,6 +60,7 @@ Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishPr
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Valid values for -PreferredVersion are:
+
 |SQL Server Release|Version|
 |------------------|-------|
 |SQL Server 2019|latest|
@@ -81,6 +82,7 @@ follow the steps in Installation
 | Get-SqlPackagePath       | Returns the path of a specific version of SqlPackage.exe |
 | Ping-SqlServer           | Checks if a specific SQL Server instance is available             |
 | Ping-SqlDatabase         | Checks if a database exists on a SQL Server              |
+| Find-SqlPackageLocations | Lists all locations of SQLPackage.exe files on the machine              |
 
 
 
