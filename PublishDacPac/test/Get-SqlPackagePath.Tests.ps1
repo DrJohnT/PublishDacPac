@@ -5,6 +5,13 @@ import-Module -Name $ModulePath;
 $ExeName = "*SqlPackage.exe";
 
 Describe "Get-SqlPackagePath" {
+
+    Context "Testing Inputs" {
+        It "Should have Version as a mandatory parameter" {
+            (Get-Command Get-SqlPackagePath).Parameters['Version'].Attributes.mandatory | Should -Be $true
+        }
+    }
+
     Context "Finds SqlPackage.exe version" {
         It "Finds SqlPackage.exe version 150" {
             ( Get-SqlPackagePath -Version 150 ) -like $ExeName | Should -Be $true
@@ -22,12 +29,12 @@ Describe "Get-SqlPackagePath" {
             ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $true
         }
 
-        It "Fails to find SqlPackage.exe version 110" {
-            Get-SqlPackagePath -Version 110 | Should -Be $null
+        It "Invalid SqlPackage.exe version 110 should Throw" {
+            { Get-SqlPackagePath -Version 110 } | Should Throw;
         }
 
-        It "Fails to find SqlPackage.exe version XXX" {
-            Get-SqlPackagePath -Version XXX | Should -Be $null
+        It "Invalid SqlPackage.exe version XXX should Throw" {
+            { Get-SqlPackagePath -Version XXX } | Should Throw;
         }
 
     }

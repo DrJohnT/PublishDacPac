@@ -7,8 +7,27 @@ function Publish-DacPac {
         Publishes a SSDT DacPac using a specified DacPac publish profile from your solution.
         Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile
 
-		Module written by (c) Dr. John Tunnicliffe, 2019 https://github.com/DrJohnT/PsPublishSqlDatabaseDacPac
+		Written by (c) Dr. John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
 		This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+
+        .PARAMETER DacPacPath
+        Full path to your database DACPAC (e.g. C:\Dev\YourDB\bin\Debug\YourDB.dacpac)
+
+        .PARAMETER DacPublishProfile
+        Name of the DAC Publish Profile to be found in the same folder as your DACPAC (e.g. YourDB.CI.publish.xml)
+        You can also provide the full path to an alternative DAC Publish Profile.
+
+        .PARAMETER TargetServerName
+        Name of the target server, including instance and port if required.
+
+        .PARAMETER TargetDatabaseName
+        Normally, the database will be named the same as your DACPAC. However, by adding the -TargetDatabaseName parameter, you can name the database anything you like.
+
+        .PARAMETER PreferredVersion
+        Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter.
+
+        .PARAMETER TestMode
+        For use with Pester tests, this simply switches off the actual deployment of the database with SqlPackage.exe.
 
 		.EXAMPLE
         Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -TargetServerName "YourDBServer"

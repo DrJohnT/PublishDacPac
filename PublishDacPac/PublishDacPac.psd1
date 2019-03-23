@@ -60,7 +60,7 @@ PrivateData = @{
         Tags = @("SSDT","deployment","DACPAC","deploy","publish","SQL","database","DAC","sqlserver","Profile","Azure","DevOps","SqlPackage","powershell","pipeline","release","data-tier","on-premise","azure","automation")
 
         # A URL to the license for this module.
-        LicenseUri = 'https://github.com/DrJohnT/PublishDacPac/PublishDacPac/blob/master/LICENSE'
+        LicenseUri = 'https://github.com/DrJohnT/PublishDacPac/blob/master/PublishDacPac/LICENSE'
 
         # A URL to the main website for this project.
         ProjectUri = 'https://github.com/DrJohnT/PublishDacPac'

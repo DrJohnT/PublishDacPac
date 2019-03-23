@@ -3,6 +3,11 @@ $ModulePath = Resolve-Path "$ModulePath\..\PublishDacPac.psd1";
 import-Module -Name $ModulePath;
 
 Describe "Ping-SqlServer" {
+    Context "Testing Inputs" {
+        It "Should have ServerName as a mandatory parameter" {
+            (Get-Command Ping-SqlServer).Parameters['ServerName'].Attributes.mandatory | Should -Be $true
+        }
+    }
 
     It "Invalid server" {
         ( Ping-SqlServer -ServerName "Invalid" ) | Should -Be $false;

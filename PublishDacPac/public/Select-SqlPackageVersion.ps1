@@ -1,12 +1,20 @@
 function Select-SqlPackageVersion {
     <#
 		.SYNOPSIS
-		Selects a version of SqlPackage.exe to use
+        Selects a version of SqlPackage.exe to use
+
+        .DESCRIPTION
+        Selects a version of SqlPackage.exe to use
+
+		Written by (c) Dr. John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
+		This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+
 	#>
     [OutputType([string])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
+        [ValidateSet('150', '140', '130', '120', 'latest')]
         [string] $PreferredVersion
     )
 
