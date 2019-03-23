@@ -59,6 +59,16 @@ Finnally, if there are multiple versions of SqlPackage.exe installed on your bui
 Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -TargetServerName "YourDBServer" -PreferredVersion latest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Valid values for -PreferredVersion are:
+|SQL Server Release|Version|
+|------------------|-------|
+|SQL Server 2019|latest|
+|SQL Server 2019|150|
+|SQL Server 2017|140|
+|SQL Server 2016|130|
+|SQL Server 2014|120|
+
+
 ## List of commands
 
 The following is a list of commands provided by this module once you
@@ -71,6 +81,8 @@ follow the steps in Installation
 | Get-SqlPackagePath       | Returns the path of a specific version of SqlPackage.exe |
 | Ping-SqlServer           | Checks if a specific SQL Server instance is available             |
 | Ping-SqlDatabase         | Checks if a database exists on a SQL Server              |
+
+
 
 ## Pre-requisites
 

@@ -1,0 +1,25 @@
+trigger:
+- master
+
+pool:
+  name: Hosted VS2017
+
+steps:
+- task: PowerShell@2
+  displayName: 'Install pre-requisites'
+  inputs:
+    targetType: filePath
+    filePath: './$(System.DefaultWorkingDirectory)\bootstrap.ps1'
+
+- task: richardfennellBM.BM-VSTS-PesterRunner-Task.Pester-Task.Pester@8
+  displayName: 'Pester Test Runner'
+  inputs:
+    scriptFolder: '$(System.DefaultWorkingDirectory)\public\*'
+    resultsFile: '$(Common.TestResultsDirectory)\Test-$(Build.DefinitionName)_$(Build.BuildNumber).xml'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/TEST-*.xml'
+  inputs:
+    testResultsFormat: NUnit
+    searchFolder: '$(Common.TestResultsDirectory)'
+  condition: always()
