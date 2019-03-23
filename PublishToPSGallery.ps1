@@ -10,8 +10,8 @@ $baseDir = $PSScriptRoot;
 
 
 try {
-    $buildDir = Resolve-Path "$baseDir\PublishDacPac.psd1";
-    Write-Host $buildDir;
+    $buildDir = "$baseDir\PublishDacPac";
+    Write-Information $buildDir;
     Write-Verbose 'Importing PowerShellGet module'
     $psGet = Import-Module PowerShellGet -PassThru -Verbose:$false
     & $psGet { [CmdletBinding()] param () Install-NuGetClientBinaries -CallerPSCmdlet $PSCmdlet -BootstrapNuGetExe -Force }
