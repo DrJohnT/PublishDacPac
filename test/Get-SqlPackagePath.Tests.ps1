@@ -1,4 +1,6 @@
-﻿import-Module -Name ..\PublishDacPac.psd1
+﻿$ModulePath = Split-Path -Parent $MyInvocation.MyCommand.Path;
+$ModulePath = Resolve-Path "$ModulePath\..\PublishDacPac.psd1";
+import-Module -Name $ModulePath;
 
 $ExeName = "*SqlPackage.exe";
 

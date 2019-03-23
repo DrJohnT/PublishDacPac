@@ -1,8 +1,10 @@
-﻿import-Module -Name ..\PublishDacPac.psd1
+﻿$CurrentFolder = Split-Path -Parent $MyInvocation.MyCommand.Path;
+$ModulePath = Resolve-Path "$CurrentFolder\..\PublishDacPac.psd1";
+import-Module -Name $ModulePath;
+
+$mediaFolder =  Resolve-Path "$CurrentFolder\..\media";
 
 $DacPac = "DatabaseToPublish.dacpac";
-$mediaFolder =  Resolve-Path "..\media";
-#Write-Host $mediaFolder ;
 $DacPacFolder = Resolve-Path "$mediaFolder\DatabaseToPublish\bin\Debug";
 $DacPacPath = Resolve-Path "$DacPacFolder\$DacPac";
 $DacProfile = "DatabaseToPublish.CI.publish.xml";
