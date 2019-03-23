@@ -4,17 +4,16 @@ param (
 )
 
 
-$VerbosePreference = 'Continue'
-$ErrorActionPreference = 'Stop'
-$baseDir = $PSScriptRoot
+$VerbosePreference = 'Continue';
+$ErrorActionPreference = 'Stop';
+$buildDir = $PSScriptRoot;
 
 try {
-    $buildDir = "$baseDir\build\psgallery\Pester"
     Write-Verbose 'Importing PowerShellGet module'
     $psGet = Import-Module PowerShellGet -PassThru -Verbose:$false
     & $psGet { [CmdletBinding()] param () Install-NuGetClientBinaries -CallerPSCmdlet $PSCmdlet -BootstrapNuGetExe -Force }
 
-    Write-Host 'Publishing module to PowerShellGet'
+    Write-Host 'Publishing module using PowerShellGet'
     $null = Publish-Module -Path $buildDir -NuGetApiKey $ApiKey -Confirm:$false
 }
 catch {
