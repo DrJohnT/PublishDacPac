@@ -44,7 +44,7 @@ function Publish-DacPac {
         $SqlPackageExePath = Get-SqlPackagePath -Version $Version;
 
 	    if (!(Test-Path -Path $SqlPackageExePath)) {
-		    Write-Error "Publish-DacPac Error: Could not find SqlPackage.exe in order to deploy a database DacPac!";
+		    Write-Error "Could not find SqlPackage.exe in order to deploy the database DacPac!";
             Write-Warning "For install instructions, see https://www.microsoft.com/en-us/download/details.aspx?id=57784/";
             throw "Could not find SqlPackage.exe in order to deploy the database DacPac!";
 	    }
@@ -67,12 +67,12 @@ function Publish-DacPac {
         if (Test-Path($DacPublishProfile)) {
             $DacPacPublishProfilePath = $DacPublishProfile;
         } else {
-	        $DacPacPublishProfilePath = Resolve-Path "$DacPacFolder\$DacPublishProfile";
+            try {
+                $DacPacPublishProfilePath = Resolve-Path "$DacPacFolder\$DacPublishProfile";
+            } catch {
+                throw "DAC Publish Profile does not exist";
+            }
         }
-
-        if (!(Test-Path -Path $DacPacPublishProfilePath)) {
-		    throw "DAC Publish Profile does not exist in $DacPacPublishProfilePath";
-	    }
 
         $ProfileName = Split-Path $DacPacPublishProfilePath -Leaf;
 

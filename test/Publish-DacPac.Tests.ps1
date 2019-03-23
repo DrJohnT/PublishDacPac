@@ -14,28 +14,28 @@ $AltDacProfilePath = Resolve-Path "$mediaFolder\DatabaseToPublish\DatabaseToPubl
 Describe "Publish-DacPac" {
     Context "Invalid SqlPackagePath" {
         It "Invalid SqlPackagePath path" {
-            Mock Get-SqlPackagePath { return "NoSqlPackage" }
-            Mock Select-SqlPackageVersion { return 150 }
-            { Publish-DacPac -DacPacPath "NoDacPac" -DacPublishProfile "NoDacPublishProfile" -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest } | Should Throw;
+            Mock -ModuleName PublishDacPac Get-SqlPackagePath { return "NoSqlPackage" };
+            Mock -ModuleName PublishDacPac Select-SqlPackageVersion { return 150 };
+            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile $DacProfile -TargetServerName "Build02" -TargetDatabaseName "MyTestDB" -PreferredVersion latest -TestMode $true } | Should Throw "Could not find SqlPackage.exe in order to deploy the database DacPac!";;
         }
     }
 
     Context "Invalid Parameters" {
 
         It "Invalid DacPacPath path" {
-            { Publish-DacPac -DacPacPath "NoDacPac" -DacPublishProfile "NoDacPublishProfile" -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest } | Should Throw;
+            { Publish-DacPac -DacPacPath "NoDacPac" -DacPublishProfile "NoDacPublishProfile" -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest -TestMode $true  } | Should Throw;
         }
 
         It "Invalid DacPublishProfile path" {
-            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile "NoDacPublishProfile" -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest } | Should Throw;
+            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile "NoDacPublishProfile" -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest -TestMode $true } | Should Throw "DAC Publish Profile does not exist";
         }
 
         It "Invalid PreferredVersion Should Not Throw" {
-            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile $DacProfile -TargetServerName "Build02" -TargetDatabaseName "MyTestDB" -PreferredVersion 312312 } | Should Not Throw;
+            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile $DacProfile -TargetServerName "Build02" -TargetDatabaseName "MyTestDB" -PreferredVersion 312312 -TestMode $true } | Should Not Throw;
         }
 
         It "Invalid TargetServerName" {
-            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile $DacProfile -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest } | Should Throw;
+            { Publish-DacPac -DacPacPath $DacPacPath -DacPublishProfile $DacProfile -TargetServerName "MyServer" -TargetDatabaseName "MyTestDB" -PreferredVersion latest -TestMode $true } | Should Throw;
         }
 
     }

@@ -28,8 +28,7 @@ function Select-SqlPackageVersion {
             if ((Get-SqlPackagePath -Version $version)) {
                 # Warn falling back.
                 if ($specificVersion) {
-                    $msg = "SQLPackage.exe version '{0}' not found. Using version '{1}'." -f $PreferredVersion, $version;
-                    Write-Information $msg
+                    Write-Information "SQLPackage.exe version '$PreferredVersion' not found. Using version '$version'."
                 }
 
                 return $version;
@@ -38,8 +37,7 @@ function Select-SqlPackageVersion {
 
         # Warn not found.
         if ($specificVersion) {
-            $msg = "SQLPackage.exe version '{0}' not found." -f $PreferredVersion;
-            Write-Information $msg;
+            Write-Information "SQLPackage.exe version '$PreferredVersion' not found.";
         }
         else {
             Write-Warning ("SQLPackage was not found on the build agent server. Try installing Microsoft SQL Server Data-Tier Application Framework");
