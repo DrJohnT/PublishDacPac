@@ -5,7 +5,7 @@ $PublicPath = Resolve-Path "$PublicPath\..\PublishDacPac\public\";
 Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
     Context 'PSScriptAnalyzer Standard Rules' {
 		Import-Module PSScriptAnalyzer;
-        $ExcludeRules = @('PSUseSingularNouns');
+        $ExcludeRules = @('PSUseSingularNouns','PSUseDeclaredVarsMoreThanAssignments');
 
 		$includeScripts = Get-ChildItem "$PublicPath" -Recurse -Include *.ps1 -Exclude *Tests.ps1;
 

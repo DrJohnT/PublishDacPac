@@ -17,13 +17,13 @@ Describe "Select-SqlPackageVersion" {
         Select-SqlPackageVersion -PreferredVersion 130 | Should -Be 130
     }
 
-    #It "Finds version 120" {
-    #    Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 120
-    #}
-
-    It "Does not find SqlPackage.exe version 120 so should return 150 (latest)" {
-        Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 150;
+    It "Finds version 120" {
+        Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 120
     }
+
+    #It "Does not find SqlPackage.exe version 120 so should return 150 (latest)" {
+    #    Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 150;
+    #}
 
     It "Does not find SqlPackage.exe version 110 so should return 150 (latest)" {
         Select-SqlPackageVersion -PreferredVersion 110 | Should -Be 150;

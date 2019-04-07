@@ -25,9 +25,13 @@ Describe "Get-SqlPackagePath" {
             ( Get-SqlPackagePath -Version 130 ) -like $ExeName | Should -Be $true
         }
 
-        It "Does not find SqlPackage.exe version 120" {
-            ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $false
+        It "Finds SqlPackage.exe version 120" {
+            ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $true
         }
+
+        #It "Does not find SqlPackage.exe version 120" {
+        #    ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $false
+        #}
 
         It "Does not find SqlPackage.exe version 110" {
             ( Get-SqlPackagePath -Version 110 ) -like $ExeName | Should -Be $false
