@@ -43,7 +43,7 @@ function Select-SqlPackageVersion {
             }
         }
 
-        # Warn not found.
+        # Warn that SQLPackage not found.
         if ($specificVersion) {
             Write-Information "SQLPackage.exe version '$PreferredVersion' not found.";
         }
