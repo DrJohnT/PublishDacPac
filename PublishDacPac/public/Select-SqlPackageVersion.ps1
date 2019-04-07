@@ -14,13 +14,13 @@ function Select-SqlPackageVersion {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [ValidateSet('150', '140', '130', '120', 'latest')]
+        [ValidateSet('150', '140', '130', '120', '110', 'latest')]
         [string] $PreferredVersion
     )
 
     try {
         $specificVersion = $PreferredVersion -and $PreferredVersion -ne 'latest'
-        $versions = '150', '140', '130', '120' | Where-Object { $_ -ne $PreferredVersion }
+        $versions = '150', '140', '130', '120', '110' | Where-Object { $_ -ne $PreferredVersion }
 
         # Look for a specific version of Microsoft SQL Server SqlPackage.exe
         if ($specificVersion) {

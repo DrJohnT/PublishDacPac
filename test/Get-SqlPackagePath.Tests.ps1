@@ -25,16 +25,16 @@ Describe "Get-SqlPackagePath" {
             ( Get-SqlPackagePath -Version 130 ) -like $ExeName | Should -Be $true
         }
 
-        #It "Finds SqlPackage.exe version 120" {
-        #    ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $true
-        #}
-
         It "Does not find SqlPackage.exe version 120" {
             ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $false
         }
 
-        It "Unsupported SqlPackage.exe version 110 so should Throw" {
-            { Get-SqlPackagePath -Version 110 } | Should Throw;
+        It "Does not find SqlPackage.exe version 110" {
+            ( Get-SqlPackagePath -Version 110 ) -like $ExeName | Should -Be $false
+        }
+
+        It "Unsupported SqlPackage.exe version 100 so should Throw" {
+            { Get-SqlPackagePath -Version 100 } | Should Throw;
         }
 
         It "Invalid SqlPackage.exe version XXX should Throw" {

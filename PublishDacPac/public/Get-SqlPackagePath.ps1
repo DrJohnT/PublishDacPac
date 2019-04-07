@@ -13,7 +13,7 @@ function Get-SqlPackagePath {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [ValidateSet('150', '140', '130', '120', 'latest')]
+        [ValidateSet('150', '140', '130', '120', '110', 'latest')]
         [string]$Version
     )
 
