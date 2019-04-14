@@ -34,18 +34,22 @@ function Publish-DacPac {
 	param
 	(
         [String] [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         $DacPacPath,
 
         [String] [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         $DacPublishProfile,
 
         [String] [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         $TargetServerName,
 
         [String] [Parameter(Mandatory = $false)]
         $TargetDatabaseName,
 
         [String] [Parameter(Mandatory = $false)]
+        [ValidateSet('150', '140', '130', '120', '110', 'latest')]
         $PreferredVersion
 	)
 

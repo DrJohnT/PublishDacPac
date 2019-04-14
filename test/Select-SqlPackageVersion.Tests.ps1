@@ -21,15 +21,11 @@ Describe "Select-SqlPackageVersion" {
         Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 120
     }
 
-    #It "Does not find SqlPackage.exe version 120 so should return 150 (latest)" {
-    #    Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 150;
-    #}
-
-    It "Does not find SqlPackage.exe version 110 so should return 150 (latest)" {
+    It "Does not find version 110 so should return 150 (latest)" {
         Select-SqlPackageVersion -PreferredVersion 110 | Should -Be 150;
     }
 
-    It "Unsupported SqlPackage.exe version 100 so should Throw" {
+    It "Unsupported version 100 so should Throw" {
         { Select-SqlPackageVersion -PreferredVersion 100 } | Should Throw;
     }
 

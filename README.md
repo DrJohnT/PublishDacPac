@@ -23,9 +23,9 @@ To automate build and deployment of databases in Azure DevOps, you can use MsBui
 
 [DAC Publish Profiles](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile) are created in Visual Studio when you Publish a database.
 
-## Install
+## Installation
 
-Install from PowerShell gallery using:
+Install from the PowerShell gallery using:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
 Install-Module -Name PublishDacPac
@@ -106,11 +106,11 @@ SqlPackage.exe
 
 Be aware that it is best to install the latest
 [SQLPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)
-as this provides support for all previous versions of SQL Server as well as the forthcoming SQL Server 2019.
+as this provides support for all previous versions of SQL Server as well current versions.
 
 ## Example SSDT DACPAC
 
-An example SSDT Visual Studio solution and the associated DACPAC is provided in the .\media folder.  You can use this to test that deployments work correctly.  Note that the SSDT Visual Studio solution is configured to deploy to SQL Server 2016.  Open the Visual Studio solution and change the target version and rebuild the solution if you have a different version of SQL Server installed.
+An example SSDT Visual Studio solution and the associated DACPAC is provided in the .\examples folder.  You can use this to test that deployments work correctly.  Note that the SSDT Visual Studio solution is configured to deploy to SQL Server 2016.  Open the Visual Studio solution and change the target version and rebuild the solution if you have a different version of SQL Server installed.
 
 ### Issue Reporting
 
