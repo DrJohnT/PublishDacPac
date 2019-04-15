@@ -14,30 +14,26 @@ function Ping-SqlDatabase {
     param
     (
         [String] [Parameter(Mandatory = $true)]
-        $ServerName,
+        [ValidateNotNullOrEmpty()]
+        $Server,
 
         [String] [Parameter(Mandatory = $true)]
-        $DatabaseName
+        [ValidateNotNullOrEmpty()]
+        $Database
     )
 
-    if ($ServerName -eq $null -or $ServerName -eq "") {
+    if ($Server -eq $null -or $Server -eq "") {
         return $false;
     }
 
     try {
         [System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SMO") | Out-Null;
-        $server = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName;
+        $SmoServer = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList $Server;
 
-        $database = $server.Databases["master"];
-        if ($database.Name -eq "master") {
-            # SQL Server instance exists, so check if the database exists
-            $database = $server.Databases[$DatabaseName];
-            if ($database.Name -eq $DatabaseName) {
-                return $true;
-            }
-            else {
-                return $false;
-            }
+        # SQL Server instance exists, so check if the database exists
+        $SmoDatabase = $SmoServer.Databases[$Database];
+        if ($SmoDatabase.Name -eq $Database) {
+            return $true;
         }
         else {
             return $false;

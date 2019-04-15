@@ -34,27 +34,27 @@ Install-Module -Name PublishDacPac
 ## Usage
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
-Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -TargetServerName "YourDBServer"
+Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -Server "YourDBServer"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Where -DacPacPath is the path to your database DACPAC, -DacPublishProfile is the name of the [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile) to be found in the same folder as your DACPAC, and -TargetServerName is the name of the target server (including instance and port if required).  The above is the minimum set of parameters that can be used with **Publish-DacPac**.
+Where -DacPacPath is the path to your database DACPAC, -DacPublishProfile is the name of the [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile) to be found in the same folder as your DACPAC, and -Server is the name of the target server (including instance and port if required).  The above is the minimum set of parameters that can be used with **Publish-DacPac**.
 
-Normally, the database will be named the same as your DACPAC (i.e. YourDB in the example above).  However, by adding the -TargetDatabaseName parameter, you can name the database anything you like.
+Normally, the database will be named the same as your DACPAC (i.e. YourDB in the example above).  However, by adding the -Database parameter, you can name the database anything you like.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
-Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -TargetServerName "YourDBServer" -TargetDatabaseName "YourNewNameDB"
+Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -Server "YourDBServer" -Database "YourNewNameDB"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can also provide the full path to an alternative [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
-Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -TargetServerName "YourDBServer"
+Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -Server "YourDBServer"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Finnally, if there are multiple versions of SqlPackage.exe installed on your build agent, you can specify which version should be used with the  -PreferredVersion option.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
-Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -TargetServerName "YourDBServer" -PreferredVersion latest
+Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -Server "YourDBServer" -PreferredVersion latest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Valid values for -PreferredVersion are:
@@ -98,11 +98,9 @@ SqlPackage.exe
 
 **Publish-DacPac** can be run on an in-house hosted Azure DevOps agent when once [SqlPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage) is installed:
 
-* By installing SQL Server 2012 or later
+* By installing the [Microsoft® SQL Server® Data-Tier Application Framework](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)
 
 * By installing Visual Studio 2012 or later
-
-* By installing the [Microsoft® SQL Server® Data-Tier Application Framework](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)
 
 Be aware that it is best to install the latest
 [SQLPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)

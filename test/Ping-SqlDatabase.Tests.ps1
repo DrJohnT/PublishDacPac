@@ -4,24 +4,24 @@ import-Module -Name $ModulePath;
 
 Describe "Ping-SqlDatabase" {
     Context "Testing Inputs" {
-        It "Should have ServerName as a mandatory parameter" {
-            (Get-Command Ping-SqlDatabase).Parameters['ServerName'].Attributes.mandatory | Should -Be $true
+        It "Should have Server as a mandatory parameter" {
+            (Get-Command Ping-SqlDatabase).Parameters['Server'].Attributes.mandatory | Should -Be $true
         }
         It "Should have DatabaseName as a mandatory parameter" {
-            (Get-Command Ping-SqlDatabase).Parameters['DatabaseName'].Attributes.mandatory | Should -Be $true
+            (Get-Command Ping-SqlDatabase).Parameters['Database'].Attributes.mandatory | Should -Be $true
         }
     }
 
     It "Invalid server" {
-        ( Ping-SqlDatabase -ServerName "InvalidServer" -DatabaseName "master" ) | Should -Be $false;
+        ( Ping-SqlDatabase -Server "InvalidServer" -Database "master" ) | Should -Be $false;
     }
 
     It "Valid server and invalid database" {
-        ( Ping-SqlDatabase -ServerName "Build02" -DatabaseName "InvalidDatabase" ) | Should -Be $false;
+        ( Ping-SqlDatabase -Server "localhost" -Database "InvalidDatabase" ) | Should -Be $false;
     }
 
     It "Valid server and database" {
-        ( Ping-SqlDatabase -ServerName "Build02" -DatabaseName "master" ) | Should -Be $true;
+        ( Ping-SqlDatabase -Server "localhost" -Database "master" ) | Should -Be $true;
     }
 
 }

@@ -1,5 +1,5 @@
 ﻿$BootStrapPath = Join-Path -Path $PSScriptRoot -ChildPath '.\bootstrap.ps1' -Resolve;
 
-. $BootStrapPath;
+#. $BootStrapPath;
 
 Invoke-Pester;

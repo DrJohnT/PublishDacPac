@@ -11,22 +11,23 @@ function Ping-SqlServer {
 
 	#>
 	[OutputType([Boolean])]
-    	[CmdletBinding()]
+    [CmdletBinding()]
 	param
 	(
-        	[String] [Parameter(Mandatory = $true)]
-        	$ServerName
+			[String] [Parameter(Mandatory = $true)]
+			[ValidateNotNullOrEmpty()]
+        	$Server
 	)
 
-	if ($ServerName -eq $null -or $ServerName -eq "") {
+	if ($Server -eq $null -or $Server -eq "") {
         	return $false;
 	}
 
 	try {
 		[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.SqlServer.SMO") | Out-Null;
-		$server = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList $ServerName;
+		$smoServer = New-Object -TypeName Microsoft.SqlServer.Management.Smo.Server -ArgumentList $Server;
 
-		$database = $server.Databases["master"];
+		$database = $smoServer.Databases["master"];
 		if ($database.Name -eq "master") {
 			return $true;
 		} else {
