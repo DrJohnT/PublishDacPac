@@ -7,6 +7,9 @@ function Publish-DacPac {
         Publishes a SSDT DacPac using a specified DacPac publish profile from your solution.
         Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile
 
+        This module requires SqlPackage.exe to be installed on the host machine.  This can be done by installing
+        Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
+
 		Written by (c) Dr. John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
 		This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
@@ -18,16 +21,43 @@ function Publish-DacPac {
         You can also provide the full path to an alternative DAC Publish Profile.
 
         .PARAMETER Server
-        Name of the target server, including instance and port if required.
+        Name of the target server, including instance and port if required.  Note that this overwrites the server defined in
+        the DAC Publish Profile
 
         .PARAMETER Database
         Normally, the database will be named the same as your DACPAC. However, by adding the -Database parameter, you can name the database anything you like.
+        Note that this overwrites the database name defined in the DAC Publish Profile.
 
-        .PARAMETER Version
-        Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter.
+        .PARAMETER PreferredVersion
+        Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all.
+        Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
 
-		.EXAMPLE
-        Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -Server "YourDBServer"
+            latest = use the latest version of SqlPackage.exe
+            150 = SQL Server 2019
+            140 = SQL Server 2017
+            130 = SQL Server 2016
+            120 = SQL Server 2014
+            110 = SQL Server 2012
+
+        .EXAMPLE
+        Publish-DacPac -Server 'YourDBServer' -Database 'NewDatabaseName' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml'
+
+        Publish your database to server 'YourDBServer' with the name 'NewDatabaseName', using the DACPAC 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' and the DAC Publish profile 'YourDB.CI.publish.xml'.
+
+        .EXAMPLE
+        Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml'
+
+        Simplist form
+
+        .EXAMPLE
+        Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -PreferredVersion 130
+
+        Request a specific version of SqlPackage.exe
+
+        .NOTES
+        This module requires SqlPackage.exe to be installed on the host machine.
+        This can be done by installing Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
+
     #>
 
 	[CmdletBinding()]
@@ -110,7 +140,6 @@ function Publish-DacPac {
 		$DacPacDacPublishProfile.Project.PropertyGroup.TargetConnectionString = "Data Source=$Server;Integrated Security=True";
 		$DacPacUpdatedProfilePath = "$DacPacFolder\$OriginalDbName.deploy.publish.xml";
 		$DacPacDacPublishProfile.Save($DacPacUpdatedProfilePath);
-
 
 		$global:lastexitcode = 0;
 
