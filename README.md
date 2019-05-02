@@ -32,6 +32,25 @@ Install from the PowerShell gallery using:
 Install-Module -Name PublishDacPac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+## List of commands
+
+The following is a list of commands provided by this module once you
+follow the steps in Installation.
+
+Click the link below for full documentation of each function.
+
+| **Function**              | **Description**                                                             |
+|--------------------------|-----------------------------------------------------------------------------|
+| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile)  |
+| [Select-SqlPackageVersion](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Select-SqlPackageVersion.md) | Finds a specific version of SqlPackage.exe               |
+| [Get-SqlPackagePath](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Get-SqlPackagePath.md) | Returns the path of a specific version of SqlPackage.exe |
+| [Ping-SqlServer](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlServer.md) | Checks if a specific SQL Server instance is available             |
+| [Ping-SqlDatabase](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlDatabase.md) | Checks if a database exists on a SQL Server              |
+| [Find-SqlPackageLocations](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Find-SqlPackageLocations.md) | Lists all locations of SQLPackage.exe files on the machine              |
+| [Invoke-ExternalCommand](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Invoke-ExternalCommand.md) | Invokes (executes) an external executable via the command-line |
+
+
+
 ## Usage
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
@@ -67,23 +86,6 @@ Valid values for -PreferredVersion are:
 |140|SQL Server 2017|
 |130|SQL Server 2016|
 |120|SQL Server 2014|
-
-
-## List of commands
-
-The following is a list of commands provided by this module once you
-follow the steps in Installation
-
-| **Function**              | **Description**                                                             |
-|--------------------------|-----------------------------------------------------------------------------|
-| Publish-DacPac           | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile)  |
-| Select-SqlPackageVersion | Finds a specific version of SqlPackage.exe               |
-| Get-SqlPackagePath       | Returns the path of a specific version of SqlPackage.exe |
-| Ping-SqlServer           | Checks if a specific SQL Server instance is available             |
-| Ping-SqlDatabase         | Checks if a database exists on a SQL Server              |
-| Find-SqlPackageLocations | Lists all locations of SQLPackage.exe files on the machine              |
-
-
 
 ## Pre-requisites
 
