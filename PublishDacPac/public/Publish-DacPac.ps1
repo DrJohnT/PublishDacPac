@@ -28,6 +28,17 @@ function Publish-DacPac {
         Normally, the database will be named the same as your DACPAC. However, by adding the -Database parameter, you can name the database anything you like.
         Note that this overwrites the database name defined in the DAC Publish Profile.
 
+        .PARAMETER SqlCmdVariables
+        A string array containing SqlCmd variables to be added/updated in the DAC Publish Profile. These should be name/value pairs with no delimiters.  For example:
+            var1=varvalue1
+            var2=varvalue2
+            var3=varvalue3
+        The simplest way of creating this in PowerShell is
+            [string[]]$sqlCmdValues = @();
+            $sqlCmdValues += "var1=varvalue1";
+            $sqlCmdValues += "var2=varvalue2";
+            $sqlCmdValues += "var3=varvalue3";
+
         .PARAMETER PreferredVersion
         Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all.
         Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
@@ -78,6 +89,9 @@ function Publish-DacPac {
         [String] [Parameter(Mandatory = $false)]
         $Database,
 
+        [String[]] [Parameter(Mandatory = $false)]
+        $SqlCmdVariables,
+
         [String] [Parameter(Mandatory = $false)]
         [ValidateSet('150', '140', '130', '120', '110', 'latest')]
         $PreferredVersion = 'latest'
@@ -127,19 +141,65 @@ function Publish-DacPac {
         $ProfileName = Split-Path $DacPacPublishProfilePath -Leaf;
 
         Write-Output "Publish-DacPac resolved the following parameters:";
-        Write-Output "DacPacPath         : $DacPacName from $DacPacFolder";
-        Write-Output "DacPublishProfile  : $ProfileName from $DacPacPublishProfilePath";
-        Write-Output "Server             : $Server" ;
-        Write-Output "Database           : $Database";
-        Write-Output "SqlPackage.exe     : $Version (v$ProductVersion) from $SqlPackageExePath" ;
+        Write-Output "DacPacPath                  : $DacPacName from $DacPacFolder";
+        Write-Output "DacPublishProfile           : $ProfileName from $DacPacPublishProfilePath";
+        Write-Output "Server                      : $Server";
+        Write-Output "Database                    : $Database";
+        Write-Output "SqlPackage.exe              : $Version (v$ProductVersion) from $SqlPackageExePath";
+
+        [xml]$DacPacDacPublishProfile = [xml](Get-Content $DacPacPublishProfilePath);
+
+        # update the database name and deployment server connection string in the DAC Publish Profile
+        $DacPacDacPublishProfile.Project.PropertyGroup.TargetDatabaseName = $Database;
+        $ExistingConnectionString = $DacPacDacPublishProfile.Project.PropertyGroup.TargetConnectionString
+        $ConnBuilder = New-Object System.Data.OleDb.OleDbConnectionStringBuilder($ExistingConnectionString);
+        $ConnBuilder["Data Source"] = $Server;
+        $DacPacDacPublishProfile.Project.PropertyGroup.TargetConnectionString = $ConnBuilder.ConnectionString;
+
+        # update the SqlCmdVariables (if any)
+        if ($SqlCmdVariables.Count -gt 0) {
+            $namesp = 'http://schemas.microsoft.com/developer/msbuild/2003';
+            [System.Xml.XmlNamespaceManager] $nsmgr = $DacPacDacPublishProfile.NameTable;
+            $nsmgr.AddNamespace('n', $namesp);
+
+            $ItemNode = $DacPacDacPublishProfile.SelectSingleNode('//n:ItemGroup', $nsmgr);
+            if ($null -eq $ItemNode) {
+                Write-Information 'Creating ItemGroup to contain SqlCmdVariables';
+                $NewElement = $DacPacDacPublishProfile.CreateNode('element', 'ItemGroup', $namesp);
+                $ItemNode = $DacPacDacPublishProfile.DocumentElement.AppendChild($NewElement);
+            }
+            foreach ($SqlCmdVariable in $SqlCmdVariables) {
+                [string[]]$NameValuePair = $SqlCmdVariable -split "=" | % { $_.trim() }
+                $name = $NameValuePair[0];
+                $value = $NameValuePair[1];
+
+                # find the matching node (if any)
+                $SqlCmdVariableNode = $DacPacDacPublishProfile.SelectNodes('//n:ItemGroup/n:SqlCmdVariable', $nsmgr) | Where-Object { ($_.Include -eq $name) };
+                if ($null -eq $SqlCmdVariableNode) {
+                    # note missing, so create it
+                    Write-Output "Adding SqlCmdVariable   name: $name  value: $value";
+                    $NewSqlCmdVariableElement = $DacPacDacPublishProfile.CreateNode('element', 'SqlCmdVariable', $namesp);
+                    $IncludeAttr = $DacPacDacPublishProfile.CreateAttribute('Include');
+                    $IncludeAttr.Value = $name;
+                    $NewSqlCmdVariableElement.Attributes.Append($IncludeAttr) | Out-Null; # do this to stop write to std output
+                    $ItemNode.AppendChild($NewSqlCmdVariableElement) | Out-Null; # do this to stop write to std output
+                    # add inner Value element
+                    $NewValueElement = $DacPacDacPublishProfile.CreateNode('element', 'Value', $namesp);
+                    $NewValueElement.InnerText = $value;
+                    $NewSqlCmdVariableElement.AppendChild($NewValueElement) | Out-Null; # do this to stop write to std output
+                } else {
+                    # note present, so update it
+                    Write-Output "Updating SqlCmdVariable name: $name  value: $value";
+                    $SqlCmdVariableNode.InnerText = $value;
+                }
+            }
+        }
+        $DacPacUpdatedProfilePath = "$DacPacFolder\$Database.deploy.publish.xml";
+        $DacPacDacPublishProfile.Save($DacPacUpdatedProfilePath);
+        Write-Output "Updated DacPublishProfile   : $DacPacUpdatedProfilePath";
+
         Write-Output "Following output generated by SqlPackage.exe";
         Write-Output "==============================================================================";
-
-		[xml]$DacPacDacPublishProfile = [xml](Get-Content $DacPacPublishProfilePath);
-		$DacPacDacPublishProfile.Project.PropertyGroup.TargetDatabaseName = "$Database";
-		$DacPacDacPublishProfile.Project.PropertyGroup.TargetConnectionString = "Data Source=$Server;Integrated Security=True";
-		$DacPacUpdatedProfilePath = "$DacPacFolder\$OriginalDbName.deploy.publish.xml";
-		$DacPacDacPublishProfile.Save($DacPacUpdatedProfilePath);
 
 		$global:lastexitcode = 0;
 

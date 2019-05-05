@@ -6,5 +6,15 @@
     <DeployScriptFileName>DatabaseToPublish.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=Build02;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
+    <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
+    <CreateNewDatabase>True</CreateNewDatabase>
   </PropertyGroup>
+  <ItemGroup>
+    <SqlCmdVariable Include="StagingDBName">
+      <Value>StagingDB</Value>
+    </SqlCmdVariable>
+    <SqlCmdVariable Include="StagingDBServer">
+      <Value>localhost</Value>
+    </SqlCmdVariable>
+  </ItemGroup>
 </Project>
