@@ -175,12 +175,15 @@
             [System.Xml.XmlNamespaceManager] $nsmgr = $DacPacDacPublishProfile.NameTable;
             $nsmgr.AddNamespace('n', $namesp);
 
-            $ItemNode = $DacPacDacPublishProfile.SelectSingleNode('//n:ItemGroup', $nsmgr);
-            if ($null -eq $ItemNode) {
-                Write-Information 'Creating ItemGroup to contain SqlCmdVariables';
-                $NewElement = $DacPacDacPublishProfile.CreateNode('element', 'ItemGroup', $namesp);
-                $ItemNode = $DacPacDacPublishProfile.DocumentElement.AppendChild($NewElement);
-            }
+            <#
+                # adding new nodes it not a good idea as they come up as warnings during deployment
+                $ItemNode = $DacPacDacPublishProfile.SelectSingleNode('//n:ItemGroup', $nsmgr);
+                if ($null -eq $ItemNode) {
+                    Write-Information 'Creating ItemGroup to contain SqlCmdVariables';
+                    $NewElement = $DacPacDacPublishProfile.CreateNode('element', 'ItemGroup', $namesp);
+                    $ItemNode = $DacPacDacPublishProfile.DocumentElement.AppendChild($NewElement);
+                }
+            #>
             foreach ($SqlCmdVariable in $SqlCmdVariables) {
                 [string[]]$NameValuePair = $SqlCmdVariable -split "=" | ForEach-Object { $_.trim() }
                 $name = $NameValuePair[0];
@@ -188,22 +191,28 @@
 
                 # find the matching node (if any)
                 $SqlCmdVariableNode = $DacPacDacPublishProfile.SelectNodes('//n:ItemGroup/n:SqlCmdVariable', $nsmgr) | Where-Object { ($_.Include -eq $name) };
+
                 if ($null -eq $SqlCmdVariableNode) {
-                    # note missing, so create it
-                    Write-Output "Adding SqlCmdVariable   name: $name  value: $value";
-                    $NewSqlCmdVariableElement = $DacPacDacPublishProfile.CreateNode('element', 'SqlCmdVariable', $namesp);
-                    $IncludeAttr = $DacPacDacPublishProfile.CreateAttribute('Include');
-                    $IncludeAttr.Value = $name;
-                    $NewSqlCmdVariableElement.Attributes.Append($IncludeAttr) | Out-Null; # do this to stop write to std output
-                    $ItemNode.AppendChild($NewSqlCmdVariableElement) | Out-Null; # do this to stop write to std output
-                    # add inner Value element
-                    $NewValueElement = $DacPacDacPublishProfile.CreateNode('element', 'Value', $namesp);
-                    $NewValueElement.InnerText = $value;
-                    $NewSqlCmdVariableElement.AppendChild($NewValueElement) | Out-Null; # do this to stop write to std output
+                    <#
+                        # adding new nodes it not a good idea as they come up as warnings during deployment
+                        # note missing, so create it
+                        Write-Output "Adding SqlCmdVariable   name: $name  value: $value";
+                        $NewSqlCmdVariableElement = $DacPacDacPublishProfile.CreateNode('element', 'SqlCmdVariable', $namesp);
+                        $IncludeAttr = $DacPacDacPublishProfile.CreateAttribute('Include');
+                        $IncludeAttr.Value = $name;
+                        $NewSqlCmdVariableElement.Attributes.Append($IncludeAttr) | Out-Null; # do this to stop write to std output
+                        $ItemNode.AppendChild($NewSqlCmdVariableElement) | Out-Null; # do this to stop write to std output
+                        # add inner Value element
+                        $NewValueElement = $DacPacDacPublishProfile.CreateNode('element', 'Value', $namesp);
+                        $NewValueElement.InnerText = $value;
+                        $NewSqlCmdVariableElement.AppendChild($NewValueElement) | Out-Null; # do this to stop write to std output
+
+                    #>
+                    Write-Warning "SqlCmdVariable '$name' was not found in DAC wublish profile";
                 } else {
-                    # note present, so update it
+                    # node present, so update it
                     Write-Output "Updating SqlCmdVariable name: $name  value: $value";
-                    $SqlCmdVariableNode.InnerText = $value;
+                    $SqlCmdVariableNode.Value = $value;
                 }
             }
         }
