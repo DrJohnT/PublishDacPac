@@ -1,5 +1,6 @@
-
-remove-module PublishDacPac
+if (Get-Module -Name PublishDacPac) {
+    Remove-Module PublishDacPac
+}
 Import-Module .\PublishDacPac -Force
 New-MarkdownHelp -Module PublishDacPac -OutputFolder .\docs -Force -FwLink https://github.com/DrJohnT/PublishDacPac/docs
 #-OnlineVersionUrl https://github.com/DrJohnT/PublishDacPac/
@@ -7,4 +8,4 @@ New-MarkdownHelp -Module PublishDacPac -OutputFolder .\docs -Force -FwLink https
 
 # Update-MarkdownHelp .\docs
 
-# New-ExternalHelp .\docs -OutputPath .\PublishDacPac\en-US\
+New-ExternalHelp .\docs -OutputPath .\PublishDacPac\en-US\ -Force;

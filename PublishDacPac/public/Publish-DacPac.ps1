@@ -1,11 +1,14 @@
-function Publish-DacPac {
+﻿function Publish-DacPac {
     <#
 		.SYNOPSIS
         Publish-DacPac allows you to deploy a SQL Server Database using a DACPAC to a SQL Server instance.
 
 		.DESCRIPTION
         Publishes a SSDT DacPac using a specified DacPac publish profile from your solution.
-        Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile
+        Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile.
+
+        Note that the XML of the DAC Publish Profile will updated with the Server, Database and SqlCmdVariables variables and a new file written to same folder as the DACPAC called
+        "$Database.deploy.publish.xml" where $Database is the value passed to the -Database parameter.
 
         This module requires SqlPackage.exe to be installed on the host machine.  This can be done by installing
         Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
@@ -29,15 +32,16 @@ function Publish-DacPac {
         Note that this overwrites the database name defined in the DAC Publish Profile.
 
         .PARAMETER SqlCmdVariables
-        A string array containing SqlCmd variables to be added/updated in the DAC Publish Profile. These should be name/value pairs with no delimiters.  For example:
+        A string array containing SqlCmd variables to be updated in the DAC Publish Profile. These should be name/value pairs with no delimiters.  For example:
             var1=varvalue1
             var2=varvalue2
             var3=varvalue3
         The simplest way of creating this in PowerShell is
-            [string[]]$sqlCmdValues = @();
-            $sqlCmdValues += "var1=varvalue1";
-            $sqlCmdValues += "var2=varvalue2";
-            $sqlCmdValues += "var3=varvalue3";
+            [string[]]$SqlCmdVariables = @();
+            $SqlCmdVariables += "var1=varvalue1";
+            $SqlCmdVariables += "var2=varvalue2";
+            $SqlCmdVariables += "var3=varvalue3";
+        And pass $SqlCmdVariables to the -SqlCmdVariables parameter.
 
         .PARAMETER PreferredVersion
         Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all.
@@ -61,9 +65,18 @@ function Publish-DacPac {
         Simplist form
 
         .EXAMPLE
-        Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -PreferredVersion 130
+        Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -PreferredVersion 130;
 
         Request a specific version of SqlPackage.exe
+
+        .EXAMPLE
+        [string[]]$SqlCmdVariables = @();
+        $SqlCmdVariables += "var1=varvalue1";
+        $SqlCmdVariables += "var2=varvalue2";
+        $SqlCmdVariables += "var3=varvalue3";
+        Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -SqlCmdVariables $SqlCmdVariables;
+
+        Shows how to pass values to the -SqlCmdVariables parameter. These will be written to the SqlCmdVariable section of the DAC publish profile.
 
         .NOTES
         This module requires SqlPackage.exe to be installed on the host machine.
@@ -169,7 +182,7 @@ function Publish-DacPac {
                 $ItemNode = $DacPacDacPublishProfile.DocumentElement.AppendChild($NewElement);
             }
             foreach ($SqlCmdVariable in $SqlCmdVariables) {
-                [string[]]$NameValuePair = $SqlCmdVariable -split "=" | % { $_.trim() }
+                [string[]]$NameValuePair = $SqlCmdVariable -split "=" | ForEach-Object { $_.trim() }
                 $name = $NameValuePair[0];
                 $value = $NameValuePair[1];
 

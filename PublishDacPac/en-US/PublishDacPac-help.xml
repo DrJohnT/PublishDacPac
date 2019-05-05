@@ -400,8 +400,9 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Publishes a SSDT DacPac using a specified DacPac publish profile from your solution. Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile</maml:para>
-      <maml:para>This module requires SqlPackage.exe to be installed on the host machine.  This can be done by installing Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017</maml:para>
+      <maml:para>Publishes a SSDT DacPac using a specified DacPac publish profile from your solution. Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile.</maml:para>
+      <maml:para>Note that the XML of the DAC Publish Profile will updated with the Server, Database and SqlCmdVariables variables and a new file written to same folder as the DACPAC called "$Database.deploy.publish.xml" where $Database is the value passed to the -Database parameter.</maml:para>
+      <maml:para>This module requires SqlPackage.exe to be installed on the host machine. This can be done by installing Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017</maml:para>
       <maml:para>Written by (c) Dr. John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
     </maml:description>
     <command:syntax>
@@ -434,7 +435,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Server</maml:name>
           <maml:Description>
-            <maml:para>Name of the target server, including instance and port if required.  Note that this overwrites the server defined in the DAC Publish Profile</maml:para>
+            <maml:para>Name of the target server, including instance and port if required. Note that this overwrites the server defined in the DAC Publish Profile</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -456,9 +457,34 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+          <maml:name>SqlCmdVariables</maml:name>
+          <maml:Description>
+            <maml:para>A string array containing SqlCmd variables to be updated in the DAC Publish Profile. These should be name/value pairs with no delimiters. For example:</maml:para>
+            <maml:para></maml:para>
+            <maml:para>var1=varvalue1</maml:para>
+            <maml:para>    var2=varvalue2</maml:para>
+            <maml:para>    var3=varvalue3</maml:para>
+            <maml:para></maml:para>
+            <maml:para>The simplest way of creating this in PowerShell is</maml:para>
+            <maml:para></maml:para>
+            <maml:para>\[string\[\]\]$SqlCmdVariables = @();</maml:para>
+            <maml:para>    $SqlCmdVariables += "var1=varvalue1";</maml:para>
+            <maml:para>    $SqlCmdVariables += "var2=varvalue2";</maml:para>
+            <maml:para>    $SqlCmdVariables += "var3=varvalue3";</maml:para>
+            <maml:para></maml:para>
+            <maml:para>And pass $SqlCmdVariables to the -SqlCmdVariables parameter.</maml:para>
+          </maml:Description>
+          <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>PreferredVersion</maml:name>
           <maml:Description>
-            <maml:para>Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all. Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
+            <maml:para>Defines the preferred version of SqlPackage.exe you wish to use. Use 'latest' for the latest version, or do not provide the parameter at all. Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
             <maml:para>    latest = use the latest version of SqlPackage.exe     150 = SQL Server 2019     140 = SQL Server 2017     130 = SQL Server 2016     120 = SQL Server 2014     110 = SQL Server 2012</maml:para>
           </maml:Description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -498,7 +524,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>Server</maml:name>
         <maml:Description>
-          <maml:para>Name of the target server, including instance and port if required.  Note that this overwrites the server defined in the DAC Publish Profile</maml:para>
+          <maml:para>Name of the target server, including instance and port if required. Note that this overwrites the server defined in the DAC Publish Profile</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -520,9 +546,34 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <maml:name>SqlCmdVariables</maml:name>
+        <maml:Description>
+          <maml:para>A string array containing SqlCmd variables to be updated in the DAC Publish Profile. These should be name/value pairs with no delimiters. For example:</maml:para>
+          <maml:para></maml:para>
+          <maml:para>var1=varvalue1</maml:para>
+          <maml:para>    var2=varvalue2</maml:para>
+          <maml:para>    var3=varvalue3</maml:para>
+          <maml:para></maml:para>
+          <maml:para>The simplest way of creating this in PowerShell is</maml:para>
+          <maml:para></maml:para>
+          <maml:para>\[string\[\]\]$SqlCmdVariables = @();</maml:para>
+          <maml:para>    $SqlCmdVariables += "var1=varvalue1";</maml:para>
+          <maml:para>    $SqlCmdVariables += "var2=varvalue2";</maml:para>
+          <maml:para>    $SqlCmdVariables += "var3=varvalue3";</maml:para>
+          <maml:para></maml:para>
+          <maml:para>And pass $SqlCmdVariables to the -SqlCmdVariables parameter.</maml:para>
+        </maml:Description>
+        <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>PreferredVersion</maml:name>
         <maml:Description>
-          <maml:para>Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all. Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
+          <maml:para>Defines the preferred version of SqlPackage.exe you wish to use. Use 'latest' for the latest version, or do not provide the parameter at all. Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
           <maml:para>    latest = use the latest version of SqlPackage.exe     150 = SQL Server 2019     140 = SQL Server 2017     130 = SQL Server 2016     120 = SQL Server 2014     110 = SQL Server 2012</maml:para>
         </maml:Description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -557,9 +608,20 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -PreferredVersion 130</dev:code>
+        <dev:code>Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -PreferredVersion 130;</dev:code>
         <dev:remarks>
           <maml:para>Request a specific version of SqlPackage.exe</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>-------------------------- EXAMPLE 4 --------------------------</maml:title>
+        <dev:code>[string[]]$SqlCmdVariables = @();
+$SqlCmdVariables += "var1=varvalue1";
+$SqlCmdVariables += "var2=varvalue2";
+$SqlCmdVariables += "var3=varvalue3";
+Publish-DacPac -Server 'YourDBServer' -DacPacPath 'C:\Dev\YourDB\bin\Debug\YourDB.dacpac' -DacPublishProfile 'YourDB.CI.publish.xml' -SqlCmdVariables $SqlCmdVariables;</dev:code>
+        <dev:remarks>
+          <maml:para>Shows how to pass values to the -SqlCmdVariables parameter. These will be written to the SqlCmdVariable section of the DAC publish profile.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
