@@ -147,7 +147,7 @@ For example:
 ```
 The simplest way of creating this in PowerShell is
 ```
-    \[string\[\]\]$SqlCmdVariables = @();
+    [string[]]$SqlCmdVariables = @();
     $SqlCmdVariables += "var1=varvalue1";
     $SqlCmdVariables += "var2=varvalue2";
     $SqlCmdVariables += "var3=varvalue3";
