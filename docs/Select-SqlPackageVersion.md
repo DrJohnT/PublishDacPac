@@ -1,7 +1,7 @@
 ---
 external help file: PublishDacPac-help.xml
 Module Name: PublishDacPac
-online version:
+online version: https://github.com/DrJohnT/PublishDacPac
 schema: 2.0.0
 ---
 
