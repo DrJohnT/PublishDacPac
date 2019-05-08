@@ -41,15 +41,15 @@ Click the link below for full documentation of each function.
 
 | **Function**              | **Description**                                                             |
 |--------------------------|-----------------------------------------------------------------------------|
-| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile)  |
-| [Select-SqlPackageVersion](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Select-SqlPackageVersion.md) | Finds a specific version of SqlPackage.exe               |
-| [Get-SqlPackagePath](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Get-SqlPackagePath.md) | Returns the path of a specific version of SqlPackage.exe |
-| [Ping-SqlServer](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlServer.md) | Checks if a specific SQL Server instance is available             |
-| [Ping-SqlDatabase](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlDatabase.md) | Checks if a database exists on a SQL Server              |
 | [Find-SqlPackageLocations](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Find-SqlPackageLocations.md) | Lists all locations of SQLPackage.exe files on the machine              |
+DAC-Publish-Profile)  |
+| [Get-SqlDatabasePath](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Get-SqlDatabasePath.md) | Returns the path to a specific SQL database in the form: SQLSERVER:\SQL\YourServer\DEFAULT\Databases\YourSQLDatabase |
+| [Get-SqlPackagePath](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Get-SqlPackagePath.md) | Returns the path of a specific version of SqlPackage.exe |
 | [Invoke-ExternalCommand](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Invoke-ExternalCommand.md) | Invokes (executes) an external executable via the command-line |
-
-
+| [Ping-SqlDatabase](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlDatabase.md) | Checks if a database exists on a SQL Server |
+| [Ping-SqlServer](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlServer.md) | Checks if a specific SQL Server instance is available |
+| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/ |
+| [Select-SqlPackageVersion](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Select-SqlPackageVersion.md) | Finds a specific version of SqlPackage.exe |
 
 ## Usage
 
