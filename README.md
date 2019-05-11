@@ -42,13 +42,12 @@ Click the link below for full documentation of each function.
 | **Function**              | **Description**                                                             |
 |--------------------------|-----------------------------------------------------------------------------|
 | [Find-SqlPackageLocations](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Find-SqlPackageLocations.md) | Lists all locations of SQLPackage.exe files on the machine              |
-DAC-Publish-Profile)  |
 | [Get-SqlDatabasePath](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Get-SqlDatabasePath.md) | Returns the path to a specific SQL database in the form: SQLSERVER:\SQL\YourServer\DEFAULT\Databases\YourSQLDatabase |
 | [Get-SqlPackagePath](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Get-SqlPackagePath.md) | Returns the path of a specific version of SqlPackage.exe |
 | [Invoke-ExternalCommand](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Invoke-ExternalCommand.md) | Invokes (executes) an external executable via the command-line |
 | [Ping-SqlDatabase](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlDatabase.md) | Checks if a database exists on a SQL Server |
 | [Ping-SqlServer](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlServer.md) | Checks if a specific SQL Server instance is available |
-| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/ |
+| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile)  |
 | [Select-SqlPackageVersion](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Select-SqlPackageVersion.md) | Finds a specific version of SqlPackage.exe |
 
 ## Usage
@@ -71,22 +70,6 @@ You can also provide the full path to an alternative [DAC Publish Profile](https
 Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -Server "YourDBServer"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Finnally, if there are multiple versions of SqlPackage.exe installed on your build agent, you can specify which version should be used with the  -PreferredVersion option.
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
-Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -Server "YourDBServer" -PreferredVersion latest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Valid values for -PreferredVersion are:
-
-|Version|SQL Server Release|
-|-------|------------------|
-|latest|Latest SQL Server version found on agent|
-|150|SQL Server 2019|
-|140|SQL Server 2017|
-|130|SQL Server 2016|
-|120|SQL Server 2014|
-
 ## Pre-requisites
 
 The following pre-requisites need to be installed for **Publish-DacPac** to work properly.
@@ -95,19 +78,19 @@ The following pre-requisites need to be installed for **Publish-DacPac** to work
 SqlPackage.exe
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-[SqlPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage) is installed when you install Visual Studio or SQL Server.  You can also install SqlPackage.exe using a dedicated installer as outlined below.
+[SqlPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage) can be installed by installing:
 
-## Azure DevOps Agent
+* [Microsoft® SQL Server® Data-Tier Application Framework](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)
 
-**Publish-DacPac** can be run on an in-house hosted Azure DevOps agent when once [SqlPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage) is installed:
+* Visual Studio 2012 or later
 
-* By installing the [Microsoft® SQL Server® Data-Tier Application Framework](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)
+Note that the latest [SQLPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download) provides support for all previous versions of SQL Server.
 
-* By installing Visual Studio 2012 or later
+## Azure DevOps Extension
 
-Be aware that it is best to install the latest
-[SQLPackage.exe](https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download)
-as this provides support for all previous versions of SQL Server as well current versions.
+**Publish-DacPac** has been published as an Azure DevOps extension called [Publish DACPAC using a DAC Publish Profile](https://marketplace.visualstudio.com/items?itemName=DrJohnExtensions.PublishDacPac) to enable Continuous Deployment scenarios.
+
+### Octopus Deploy /
 
 ## Example SSDT DACPAC
 
