@@ -22,7 +22,7 @@ procedures, roles, users, extended properties etc. Using a DAC Publish Profile, 
 
 To automate build and deployment of databases in Azure DevOps, you can use MsBuild to create DACPAC from your Visual Studio solution.  You can then add a PowerShell task which uses **Publish-DacPac** to invoke SQLPackage.exe to deploy each DACPAC using your own custom DAC Publish Profile.
 
-[DAC Publish Profiles](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile) are created in Visual Studio when you Publish a database.
+[DAC Publish Profiles](https://github.com/DrJohnT/AzureDevOpsExtensionsForSqlServer/wiki/DAC-Publish-Profile) are created in Visual Studio when you Publish a database.
 
 ## Installation
 
@@ -47,7 +47,7 @@ Click the link below for full documentation of each function.
 | [Invoke-ExternalCommand](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Invoke-ExternalCommand.md) | Invokes (executes) an external executable via the command-line |
 | [Ping-SqlDatabase](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlDatabase.md) | Checks if a database exists on a SQL Server |
 | [Ping-SqlServer](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Ping-SqlServer.md) | Checks if a specific SQL Server instance is available |
-| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile)  |
+| [Publish-DacPac](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Publish-DacPac.md) | Publishes a DACPAC using a [DAC Publish Profile](https://github.com/DrJohnT/AzureDevOpsExtensionsForSqlServer/wiki/DAC-Publish-Profile)  |
 | [Select-SqlPackageVersion](https://github.com/DrJohnT/PublishDacPac/blob/master/docs/Select-SqlPackageVersion.md) | Finds a specific version of SqlPackage.exe |
 
 ## Usage
@@ -56,7 +56,7 @@ Click the link below for full documentation of each function.
 Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -Server "YourDBServer"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Where -DacPacPath is the path to your database DACPAC, -DacPublishProfile is the name of the [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile) to be found in the same folder as your DACPAC, and -Server is the name of the target server (including instance and port if required).  The above is the minimum set of parameters that can be used with **Publish-DacPac**.
+Where -DacPacPath is the path to your database DACPAC, -DacPublishProfile is the name of the [DAC Publish Profile](https://github.com/DrJohnT/AzureDevOpsExtensionsForSqlServer/wiki/DAC-Publish-Profile) to be found in the same folder as your DACPAC, and -Server is the name of the target server (including instance and port if required).  The above is the minimum set of parameters that can be used with **Publish-DacPac**.
 
 Normally, the database will be named the same as your DACPAC (i.e. YourDB in the example above).  However, by adding the -Database parameter, you can name the database anything you like.
 
@@ -64,7 +64,7 @@ Normally, the database will be named the same as your DACPAC (i.e. YourDB in the
 Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "YourDB.CI.publish.xml" -Server "YourDBServer" -Database "YourNewNameDB"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can also provide the full path to an alternative [DAC Publish Profile](https://github.com/DrJohnT/PublishDacPac/wiki/DAC-Publish-Profile).
+You can also provide the full path to an alternative [DAC Publish Profile](https://github.com/DrJohnT/AzureDevOpsExtensionsForSqlServer/wiki/DAC-Publish-Profile).
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ powershell
 Publish-DacPac -DacPacPath "C:\Dev\YourDB\bin\Debug\YourDB.dacpac" -DacPublishProfile "C:\Dev\YourDB\bin\Debug\YourDB.CI.publish.xml" -Server "YourDBServer"
@@ -89,8 +89,6 @@ Note that the latest [SQLPackage.exe](https://docs.microsoft.com/en-us/sql/tools
 ## Azure DevOps Extension
 
 **Publish-DacPac** has been published as an Azure DevOps extension called [Publish DACPAC using a DAC Publish Profile](https://marketplace.visualstudio.com/items?itemName=DrJohnExtensions.PublishDacPac) to enable Continuous Deployment scenarios.
-
-### Octopus Deploy /
 
 ## Example SSDT DACPAC
 
