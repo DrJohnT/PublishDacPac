@@ -19,10 +19,6 @@ Ping-SqlServer [-Server] <String> [<CommonParameters>]
 ## DESCRIPTION
 Checks that the SQL Server instance exists
 
-Written by (c) Dr.
-John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
-This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
-
 ## EXAMPLES
 
 ### EXAMPLE 1
@@ -58,5 +54,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### Returns $true if the server is found, $false otherwise.
 ## NOTES
+Written by (c) Dr.
+John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
+
+[https://github.com/DrJohnT/PublishDacPac](https://github.com/DrJohnT/PublishDacPac)
+

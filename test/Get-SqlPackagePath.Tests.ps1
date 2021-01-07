@@ -1,51 +1,86 @@
-﻿$ModulePath = Split-Path -Parent $MyInvocation.MyCommand.Path;
-$ModulePath = Resolve-Path "$ModulePath\..\PublishDacPac\PublishDacPac.psd1";
-import-Module -Name $ModulePath;
+﻿BeforeAll { 
+    $CurrentFolder = Split-Path -Parent $PSScriptRoot;
+    $ModulePath = Resolve-Path "$CurrentFolder\PublishDacPac\PublishDacPac.psd1";
+    Import-Module -Name $ModulePath;
 
-$ExeName = "*SqlPackage.exe";
+    function ResetEnv {
+        $value = [Environment]::GetEnvironmentVariable("CustomSqlPackageInstallLocation");
+        if ("$value" -ne "") {
+            Clear-Item -Path Env:CustomSqlPackageInstallLocation;
+        }
+    }
+    ResetEnv;
+}
 
 Describe "Get-SqlPackagePath" {
 
     Context "Testing Inputs" {
         It "Should have Version as a mandatory parameter" {
-            (Get-Command Get-SqlPackagePath).Parameters['Version'].Attributes.mandatory | Should -Be $true
+            (Get-Command Get-SqlPackagePath).Parameters['Version'].Attributes.mandatory | Should -BeTrue;
         }
     }
 
     Context "Finds SqlPackage.exe version" {
-        It "Finds SqlPackage.exe version 150" {
-            ( Get-SqlPackagePath -Version 150 ) -like $ExeName | Should -Be $true
+        It "Finds SqlPackage.exe version 15" {
+            ( Get-SqlPackagePath -Version 15 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Finds SqlPackage.exe version 140" {
-            ( Get-SqlPackagePath -Version 140 ) -like $ExeName | Should -Be $true
+        It "Finds SqlPackage.exe version 14" {
+            ( Get-SqlPackagePath -Version 14 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Finds SqlPackage.exe version 130" {
-            ( Get-SqlPackagePath -Version 130 ) -like $ExeName | Should -Be $true
+        It "Does not find SqlPackage.exe version 13" {
+            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
         }
 
-        It "Finds SqlPackage.exe version 120" {
-            ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $true
+        It "Does not find SqlPackage.exe version 12" {
+            ( Get-SqlPackagePath -Version 12 ) -like "*SqlPackage.exe" | Should -BeFalse;
         }
 
-        #It "Does not find SqlPackage.exe version 120" {
-        #    ( Get-SqlPackagePath -Version 120 ) -like $ExeName | Should -Be $false
-        #}
-
-        It "Does not find SqlPackage.exe version 110" {
-            ( Get-SqlPackagePath -Version 110 ) -like $ExeName | Should -Be $false
+        It "Does not find SqlPackage.exe version 11" {
+            ( Get-SqlPackagePath -Version 11 ) -like "*SqlPackage.exe" | Should -BeFalse;
         }
 
-        It "Unsupported SqlPackage.exe version 100 so should Throw" {
-            { Get-SqlPackagePath -Version 100 } | Should Throw;
+        It "Unsupported SqlPackage.exe version 10 so Should -Throw;" {
+            { Get-SqlPackagePath -Version 10 } | Should -Throw;
         }
 
-        It "Invalid SqlPackage.exe version XXX should Throw" {
-            { Get-SqlPackagePath -Version XXX } | Should Throw;
+        It "Invalid SqlPackage.exe version XX Should -Throw;" {
+            { Get-SqlPackagePath -Version XX } | Should -Throw;
         }
 
+        It "Valid folder but SqlPackage.exe is not present in folder" {
+            ResetEnv;
+            $env:CustomSqlPackageInstallLocation = $PSScriptRoot;
+            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        }
+
+        It "Invalid folder location for CustomAsDwInstallLocation" {
+            ResetEnv;
+            $env:CustomSqlPackageInstallLocation = $PSScriptRoot + "\xxx";
+            { Get-SqlPackagePath -Version 13 } | Should -Throw;
+        }
+
+        It "Valid folder location and SqlPackage.exe present" {
+            ResetEnv;
+            $ExePath = Split-Path -Parent $PSScriptRoot;
+            $ExePath = Resolve-Path "$ExePath\examples\ForTests\CustomSqlPackageInstallLocation";
+            $env:CustomSqlPackageInstallLocation = $ExePath;
+            ( Get-SqlPackagePath -Version 12 ) -like "*SqlPackage.exe" | Should -BeTrue;
+        }
+
+        It "Valid folder location and SqlPackage.exe present but is not 13" {
+            ResetEnv;
+            $ExePath = Split-Path -Parent $PSScriptRoot;
+            $ExePath = Resolve-Path "$ExePath\examples\ForTests\CustomSqlPackageInstallLocation";
+            $env:CustomSqlPackageInstallLocation = $ExePath;
+            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        }
+        
     }
 }
 
-Remove-Module -Name PublishDacPac
+AfterAll {
+    Remove-Module -Name PublishDacPac;
+}
+ 

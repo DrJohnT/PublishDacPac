@@ -57,12 +57,22 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="dbo" />
+    <Folder Include="Scripts\Post-Deploy" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="MyOnlyTable.sql" />
+    <Build Include="dbo\Tables\MyOnlyTable.sql" />
+    <PostDeploy Include="Scripts\Post-Deploy\PostDeploy.sql" />
+    <Build Include="dbo\Tables\MyOtherTable.sql" />
+    <Build Include="dbo\Tables\MyTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DatabaseToPublish.CI.publish.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="DatabaseToPublish.Upgrade.publish.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="DatabaseToPublish.LOCAL.publish.xml">

@@ -24,13 +24,8 @@ Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish p
 Note that the XML of the DAC Publish Profile will updated with the Server, Database and SqlCmdVariables variables and a new file written to same folder as the DACPAC called
 "$Database.deploy.publish.xml" where $Database is the value passed to the -Database parameter.
 
-This module requires SqlPackage.exe to be installed on the host machine. 
-This can be done by installing
-Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
-
-Written by (c) Dr.
-John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
-This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+This module requires SqlPackage.exe to be installed on the host machine.
+See https://docs.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage-download
 
 ## EXAMPLES
 
@@ -141,14 +136,18 @@ Accept wildcard characters: False
 A string array containing SqlCmd variables to be updated in the DAC Publish Profile.
 These should be name/value pairs with no delimiters. 
 For example:
+
     var1=varvalue1
     var2=varvalue2
     var3=varvalue3
+
 The simplest way of creating this in PowerShell is
+
     \[string\[\]\]$SqlCmdVariables = @();
     $SqlCmdVariables += "var1=varvalue1";
     $SqlCmdVariables += "var2=varvalue2";
     $SqlCmdVariables += "var3=varvalue3";
+
 And pass $SqlCmdVariables to the -SqlCmdVariables parameter.
 
 ```yaml
@@ -169,11 +168,11 @@ Use 'latest' for the latest version, or do not provide the parameter at all.
 Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
 
     latest = use the latest version of SqlPackage.exe
-    150 = SQL Server 2019
-    140 = SQL Server 2017
-    130 = SQL Server 2016
-    120 = SQL Server 2014
-    110 = SQL Server 2012
+    15 = SQL Server 2019
+    14 = SQL Server 2017
+    13 = SQL Server 2016
+    12 = SQL Server 2014
+    11 = SQL Server 2012
 
 ```yaml
 Type: String
@@ -195,7 +194,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-This module requires SqlPackage.exe to be installed on the host machine.
-This can be done by installing Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
+Written by (c) Dr.
+John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
+
+[https://github.com/DrJohnT/PublishDacPac](https://github.com/DrJohnT/PublishDacPac)
+

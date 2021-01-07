@@ -1,37 +1,55 @@
-﻿$ModulePath = Split-Path -Parent $MyInvocation.MyCommand.Path;
-$ModulePath = Resolve-Path "$ModulePath\..\PublishDacPac\PublishDacPac.psd1";
-import-Module -Name $ModulePath;
+﻿BeforeAll { 
+    $CurrentFolder = Split-Path -Parent $PSScriptRoot;
+    $ModulePath = Resolve-Path "$CurrentFolder\PublishDacPac\PublishDacPac.psd1";
+    Import-Module -Name $ModulePath;
+
+    function ResetEnv {
+        $value = [Environment]::GetEnvironmentVariable("CustomSqlPackageInstallLocation");
+        if ("$value" -ne "") {
+            Clear-Item -Path Env:CustomSqlPackageInstallLocation;
+        }
+    }
+    ResetEnv;
+}
 
 Describe "Select-SqlPackageVersion" {
 
     It "Finds latest version" {
-        Select-SqlPackageVersion -PreferredVersion latest | Should -Be 150
+        Select-SqlPackageVersion -PreferredVersion 'latest' | Should -Be 15
     }
-    It "Finds version 150" {
+    
+    It "Finds version 15" {
+        Select-SqlPackageVersion -PreferredVersion 15 | Should -Be 15
+    }
+    
+    It "150 Finds version 15" {
         Select-SqlPackageVersion -PreferredVersion 150 | Should -Be 150
     }
-    It "Finds version 140" {
-        Select-SqlPackageVersion -PreferredVersion 140 | Should -Be 140
+    It "Finds version 14" {
+        Select-SqlPackageVersion -PreferredVersion 14 | Should -Be 14
     }
-    It "Finds version 130" {
-        Select-SqlPackageVersion -PreferredVersion 130 | Should -Be 130
-    }
-
-    It "Finds version 120" {
-        Select-SqlPackageVersion -PreferredVersion 120 | Should -Be 120
+    It "Does not find version 13 so should return 15 (latest)" {
+        Select-SqlPackageVersion -PreferredVersion 13 | Should -Be 15
     }
 
-    It "Does not find version 110 so should return 150 (latest)" {
-        Select-SqlPackageVersion -PreferredVersion 110 | Should -Be 150;
+    It "Does not find version 12 so should return 15 (latest)" {
+        Select-SqlPackageVersion -PreferredVersion 12 | Should -Be 15
     }
 
-    It "Unsupported version 100 so should Throw" {
-        { Select-SqlPackageVersion -PreferredVersion 100 } | Should Throw;
+    It "Does not find version 11 so should return 15 (latest)" {
+        Select-SqlPackageVersion -PreferredVersion 11 | Should -Be 15;
     }
 
-    It "Invalid version XXX so should throw" {
-        { Select-SqlPackageVersion -PreferredVersion XXX } | Should Throw;
+    It "Unsupported version 10 so Should -Throw;" {
+        { Select-SqlPackageVersion -PreferredVersion 10 } | Should -Throw;
     }
+
+    It "Invalid version XX so Should -Throw;" {
+        { Select-SqlPackageVersion -PreferredVersion XX } | Should -Throw;
+    }
+    
 }
 
-Remove-Module -Name PublishDacPac
+AfterAll {
+    Remove-Module -Name PublishDacPac;
+}

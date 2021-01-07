@@ -5,28 +5,35 @@ online version: https://github.com/DrJohnT/PublishDacPac
 schema: 2.0.0
 ---
 
-# Ping-SqlDatabase
+# Remove-Database
 
 ## SYNOPSIS
-Checks that the database exists on the SQL Server
+Removes (Drops) the specified SQL database
 
 ## SYNTAX
 
 ```
-Ping-SqlDatabase [-Server] <String> [-Database] <String> [<CommonParameters>]
+Remove-Database [-Server] <String> [-Database] <String> [[-Credential] <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Checks that the database exists on the SQL Server instance
+Removes / Drops the specified SQL database from the SQL Server instance
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Ping-SqlDatabase -Server localhost -Database 'MyDatabase'
+Remove-Database -Server 'localhost' -Database 'MyTestDB'
 ```
 
-Find 'MyDatabase' on your local machine
+Connects to the server localhost to remove the database MyTestDB
+
+### EXAMPLE 2
+```
+Remove-Database -Server 'localhost' -Database 'MyTestDB' -Credential myCred
+```
+
+Connects to the server localhost using the credential supplied in myCred to remove the database MyTestDB
 
 ## PARAMETERS
 
@@ -46,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -Database
-The name of the database you are checking exists.
+The name of the database to be deleted.
 
 ```yaml
 Type: String
@@ -60,6 +67,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Credential
+\[Optional\] A PSCredential object containing the credentials to connect to the AAS server.
+
+```yaml
+Type: PSCredential
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -67,7 +89,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### Returns $true if the database is found, $false otherwise.
 ## NOTES
 Written by (c) Dr.
 John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac

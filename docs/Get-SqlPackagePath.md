@@ -19,18 +19,25 @@ Get-SqlPackagePath [-Version] <String> [<CommonParameters>]
 ## DESCRIPTION
 Finds the path to specific version of SqlPackage.exe
 
-Written by (c) Dr.
-John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
-This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+Checks the following locations: 
+
+    ${env:ProgramFiles}\Microsoft SQL Server\*\Tools\Binn
+    ${env:ProgramFiles(x86)}\Microsoft SQL Server\*\Tools\Binn
+    ${env:ProgramFiles(x86)}\Microsoft SQL Server Management Studio *\Common7\IDE
+    $env:CustomSqlPackageInstallLocation
+
+The environment variable $env:CustomSqlPackageInstallLocation allows you to specify your own custom install directory.
+
+For information on SqlPackage.exe see https://docs.microsoft.com/en-us/sql/tools/sqlpackage
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-SqlPackagePath -Version 130
+Get-SqlPackagePath -Version 13
 ```
 
-Return the full path to a specific version of SqlPackage.exe
+Returns the path to the SQL Server 2016 version of SqlPackage.exe (if present on the machine).
 
 ### EXAMPLE 2
 ```
@@ -42,13 +49,16 @@ Return the full path to a latest version of SqlPackage.exe
 ## PARAMETERS
 
 ### -Version
-Defines the specific version of SqlPackage.exe to which you wish to obtain the path
-    latest = use the latest version of SqlPackage.exe
-    150 = SQL Server 2019
-    140 = SQL Server 2017
-    130 = SQL Server 2016
-    120 = SQL Server 2014
-    110 = SQL Server 2012
+Defines the specific version of SqlPackage.exe to which you wish to obtain the path.
+Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:
+
+* 15: SQL Server 2019
+* 14: SQL Server 2017
+* 13: SQL Server 2016
+* 12: SQL Server 2014
+* 11: SQL Server 2012
+
+If you are unsure which version(s) of SqlPackage.exe you have installed, use the function **Find-SqlPackageLocations** to obtain a full list.
 
 ```yaml
 Type: String
@@ -71,7 +81,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### The full path to the specific version of SqlPackage.exe you requested
 ## NOTES
-This module requires SqlPackage.exe to be installed on the host machine.
-This can be done by installing Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
+Written by (c) Dr.
+John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
+
+[https://github.com/DrJohnT/PublishDacPac](https://github.com/DrJohnT/PublishDacPac)
+

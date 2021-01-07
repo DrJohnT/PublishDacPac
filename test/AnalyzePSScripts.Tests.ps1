@@ -1,10 +1,13 @@
-﻿$PublicPath = Split-Path -Parent $MyInvocation.MyCommand.Path
-$PublicPath = Resolve-Path "$PublicPath\..\PublishDacPac\public\";
+﻿# How to format results https://devblogs.microsoft.com/scripting/psscriptanalyzer-deep-dive-part-3-of-4/
 
 #region PSScriptAnalyzer Testing
-Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
+Describe 'Checking scripts against PSScriptAnalyzer rules' -Tag "Round1" {
     Context 'PSScriptAnalyzer Standard Rules' {
 		Import-Module PSScriptAnalyzer;
+
+		$CurrentFolder = Split-Path -Parent $PSScriptRoot;
+		$PublicPath = Resolve-Path "$CurrentFolder\PublishDacPac\public\";
+
         $ExcludeRules = @('PSUseSingularNouns','PSUseDeclaredVarsMoreThanAssignments');
 
 		$includeScripts = Get-ChildItem "$PublicPath" -Recurse -Include *.ps1 -Exclude *Tests.ps1;
@@ -25,7 +28,7 @@ Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
 		        {
 			        It "Should pass $Rule" {
 				        $Failures = $AnalyzerIssues | Where-Object -Property RuleName -EQ -Value $rule
-				        ($Failures | Measure-Object).Count | Should Be 0
+				        ($Failures | Measure-Object).Count | Should -Be 0
 			        }
 		        }
 <#
@@ -34,7 +37,7 @@ Describe -Tags 'PSSA' -Name 'Checking scripts against PSScriptAnalyzer rules' {
 			        # We still want it in the tests, but since it doesn't actually get tested we will skip
 			        It "Should pass $Rule" -Skip {
 				        $Failures = $AnalyzerIssues | Where-Object -Property RuleName -EQ -Value $rule
-				        ($Failures | Measure-Object).Count | Should Be 0
+				        ($Failures | Measure-Object).Count | Should -Be 0
 			        }
 		        }
 #>

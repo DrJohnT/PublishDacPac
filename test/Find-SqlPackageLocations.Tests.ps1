@@ -1,13 +1,39 @@
-﻿$ModulePath = Split-Path -Parent $MyInvocation.MyCommand.Path;
-$ModulePath = Resolve-Path "$ModulePath\..\PublishDacPac\PublishDacPac.psd1";
-import-Module -Name $ModulePath;
+﻿BeforeAll { 
+    $CurrentFolder = Split-Path -Parent $PSScriptRoot;
+    $ModulePath = Resolve-Path "$CurrentFolder\PublishDacPac\PublishDacPac.psd1";
+    Import-Module -Name $ModulePath;
 
-Describe "Find-SqlPackageLocations" {
-
-    It "Finds some version" {
-        ( Find-SqlPackageLocations ) | Should -Not -Be $null
+    function ResetEnv {
+        $value = [Environment]::GetEnvironmentVariable("CustomSqlPackageInstallLocation");
+        if ("$value" -ne "") {
+            Clear-Item -Path Env:CustomSqlPackageInstallLocation;
+        }
     }
 
+    ResetEnv;
 }
 
-Remove-Module -Name PublishDacPac
+Describe "Find-SqlPackageLocations" -Tag "Round1" {
+    Context "Should return output" {
+        It "Finds some version" {
+            ( Find-SqlPackageLocations ) | Should -Not -Be $null
+            $lines = Find-SqlPackageLocations | Measure-Object;
+            $lines.Count | Should -Be 5;
+        }
+<#
+        It "Valid folder location and SqlPackage.exe present" {
+            ResetEnv;
+            $ExePath = Split-Path -Parent $PSScriptRoot;
+            $ExePath = Resolve-Path "$ExePath\examples\DeploymentWizard";
+            $env:CustomAsDwInstallLocation = $ExePath;
+
+            $lines = Find-SqlPackageLocations | Measure-Object;
+            $lines.Count | Should -Be 6;
+        }
+#>        
+    }
+}
+
+AfterAll {
+    Remove-Module -Name PublishDacPac;
+}

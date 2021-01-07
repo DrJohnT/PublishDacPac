@@ -1,5 +1,5 @@
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/PublishDacPac.svg)](https://www.powershellgallery.com/packages/PublishDacPac)
-[![Build Status](https://qatar-re.visualstudio.com/QatarRe.BI/_apis/build/status/Test%20and%20Publish%20Package%20PublishDacPac?branchName=master)](https://qatar-re.visualstudio.com/QatarRe.BI/_build/latest?definitionId=51&branchName=master)
+[![Build status](https://dev.azure.com/drjohnt/PublishDacPac/_apis/build/status/PublishDacPac-CI)](https://dev.azure.com/drjohnt/PublishDacPac/_build/latest?definitionId=7)
 
 ### PublishDacPac
 

@@ -3,6 +3,7 @@ param (
     [string] $ApiKey
 )
 
+.\UpdateHelp.ps1
 
 $VerbosePreference = 'Continue';
 $ErrorActionPreference = 'Stop';

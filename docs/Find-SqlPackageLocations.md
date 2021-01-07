@@ -1,7 +1,7 @@
 ---
 external help file: PublishDacPac-help.xml
 Module Name: PublishDacPac
-online version:
+online version: https://github.com/DrJohnT/PublishDacPac
 schema: 2.0.0
 ---
 
@@ -17,11 +17,9 @@ Find-SqlPackageLocations
 ```
 
 ## DESCRIPTION
-Simply finds and lists the location path to every version of SqlPackage.exe on the machine
+Simply finds and lists the location path to every version of SqlPackage.exe on the machine.
 
-Written by (c) Dr.
-John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
-This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+For information on SqlPackage.exe see https://docs.microsoft.com/en-us/sql/tools/sqlpackage
 
 ## EXAMPLES
 
@@ -36,8 +34,16 @@ Simply lists all instances of SqlPackage.exe on the host machine
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### Output is written to standard output.
 ## NOTES
+Written by (c) Dr.
+John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
+
+[https://github.com/DrJohnT/PublishDacPac](https://github.com/DrJohnT/PublishDacPac)
+

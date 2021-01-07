@@ -19,9 +19,7 @@ Select-SqlPackageVersion [-PreferredVersion] <String> [<CommonParameters>]
 ## DESCRIPTION
 Selects (finds) a specific version of SqlPackage.exe to use in subsequent commands.
 
-Written by (c) Dr.
-John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac
-This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+For information on SqlPackage.exe see https://docs.microsoft.com/en-us/sql/tools/sqlpackage
 
 ## EXAMPLES
 
@@ -34,7 +32,7 @@ Attempt to find latest version of SqlPackage.exe
 
 ### EXAMPLE 2
 ```
-Select-SqlPackageVersion -PreferredVersion 130
+Select-SqlPackageVersion -PreferredVersion 13
 ```
 
 Return the SQL Server 2016 version of SqlPackage.exe if it exists, otherwise return latest
@@ -44,13 +42,16 @@ Return the SQL Server 2016 version of SqlPackage.exe if it exists, otherwise ret
 ### -PreferredVersion
 Defines the preferred version of SqlPackage.exe you wish to find. 
 Use 'latest' for the latest version, or do not provide the parameter.
+Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:
 
     latest = use the latest version of SqlPackage.exe
-    150 = SQL Server 2019
-    140 = SQL Server 2017
-    130 = SQL Server 2016
-    120 = SQL Server 2014
-    110 = SQL Server 2012
+    15 = SQL Server 2019
+    14 = SQL Server 2017
+    13 = SQL Server 2016
+    12 = SQL Server 2014
+    11 = SQL Server 2012
+
+If you are unsure which version(s) of SqlPackage.exe you have installed, use the function **Find-SqlPackageLocations** to obtain a full list.
 
 ```yaml
 Type: String
@@ -73,7 +74,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### Returns the version of SqlPackage.exe found.
 ## NOTES
-This module requires SqlPackage.exe to be installed on the host machine.
-This can be done by installing Microsoft SQL Server Management Studio from https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
+Written by (c) Dr.
+John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
+
+[https://github.com/DrJohnT/PublishDacPac](https://github.com/DrJohnT/PublishDacPac)
+

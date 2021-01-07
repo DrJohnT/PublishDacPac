@@ -1,26 +1,28 @@
-$ModulePath = Split-Path -Parent $MyInvocation.MyCommand.Path;
-$ModulePath = Resolve-Path "$ModulePath\..\PublishDacPac\PublishDacPac.psd1";
-import-Module -Name $ModulePath;
+BeforeAll { 
+    $CurrentFolder = Split-Path -Parent $PSScriptRoot;
+    $ModulePath = Resolve-Path "$CurrentFolder\PublishDacPac\PublishDacPac.psd1";
+    Import-Module -Name $ModulePath;
+}
 
 Describe "Get-SqlDatabasePath" {
     Context "Testing Inputs" {
         It "Should have Server as a mandatory parameter" {
-            (Get-Command Get-SqlDatabasePath).Parameters['Server'].Attributes.mandatory | Should -Be $true
+            (Get-Command Get-SqlDatabasePath).Parameters['Server'].Attributes.mandatory | Should -BeTrue;
         }
         It "Should have Database as a mandatory parameter" {
-            (Get-Command Get-SqlDatabasePath).Parameters['Database'].Attributes.mandatory | Should -Be $true
+            (Get-Command Get-SqlDatabasePath).Parameters['Database'].Attributes.mandatory | Should -BeTrue;
         }
         It "Empty server" {
-            { Get-SqlDatabasePath -Server "" -Database MyCube } | Should Throw;
+            { Get-SqlDatabasePath -Server "" -Database MyCube } | Should -Throw;
         }
         It "Null server" {
-            { Get-SqlDatabasePath -Server $null -Database MyCube } | Should Throw;
+            { Get-SqlDatabasePath -Server $null -Database MyCube } | Should -Throw;
         }
         It "Empty Database" {
-            { Get-SqlDatabasePath -Server localhost -Database "" } | Should Throw;
+            { Get-SqlDatabasePath -Server localhost -Database "" } | Should -Throw;
         }
         It "Null Database" {
-            { Get-SqlDatabasePath -Server localhost -Database $null } | Should Throw;
+            { Get-SqlDatabasePath -Server localhost -Database $null } | Should -Throw;
         }
     }
 
@@ -39,4 +41,6 @@ Describe "Get-SqlDatabasePath" {
     }
 }
 
-Remove-Module -Name PublishDacPac
+AfterAll {
+    Remove-Module -Name PublishDacPac;
+}
