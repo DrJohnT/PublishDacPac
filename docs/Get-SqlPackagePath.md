@@ -21,9 +21,12 @@ Finds the path to specific version of SqlPackage.exe
 
 Checks the following locations: 
 
+    ${env:ProgramFiles}\Microsoft SQL Server\*\DAC\bin
     ${env:ProgramFiles}\Microsoft SQL Server\*\Tools\Binn
     ${env:ProgramFiles(x86)}\Microsoft SQL Server\*\Tools\Binn
-    ${env:ProgramFiles(x86)}\Microsoft SQL Server Management Studio *\Common7\IDE
+    ${env:ProgramFiles(x86)}\Microsoft SQL Server\*\DAC\bin
+    ${env:ProgramFiles(x86)}\Microsoft Visual Studio *\Common7\IDE\Extensions\Microsoft\SQLDB\DAC
+    ${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\
     $env:CustomSqlPackageInstallLocation
 
 The environment variable $env:CustomSqlPackageInstallLocation allows you to specify your own custom install directory.
