@@ -55,10 +55,10 @@ Describe "Get-SqlPackagePath" {
             ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
         }
 
-        It "Invalid folder location for CustomAsDwInstallLocation" {
+        It "Invalid folder location for CustomSqlPackageInstallLocation" {
             ResetEnv;
             $env:CustomSqlPackageInstallLocation = $PSScriptRoot + "\xxx";
-            { Get-SqlPackagePath -Version 13 } | Should -Throw;
+            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
         }
 
         It "Valid folder location and SqlPackage.exe present" {

@@ -12,16 +12,17 @@ $output = Find-SqlPackageLocations
 write-host $output
 
 Remove-Module -Name PublishDacPac;
-
 #>
+
+#Invoke-Pester 
 #Invoke-Pester -Script .\AnalyzePSScripts.Tests.ps1
 #Invoke-Pester -Script .\Find-SqlPackageLocations.Tests.ps1
-#Invoke-Pester -Script .\Get-SqlPackagePath.Tests.ps1
+Invoke-Pester -Script .\Get-SqlPackagePath.Tests.ps1
 #Invoke-Pester -Script .\Select-SqlPackageVersion.Tests.ps1
 #Invoke-Pester -Script .\Ping-SqlServer.Tests.ps1
 #Invoke-Pester -Script .\Ping-SqlDatabase.Tests.ps1
 
-Invoke-Pester -Script .\Publish-DacPac.Tests.ps1
+#Invoke-Pester -Script .\Publish-DacPac.Tests.ps1
 #Invoke-Pester -Script .\Remove-Database.Tests.ps1
 
 
