@@ -13,7 +13,9 @@ Removes (Drops) the specified SQL database
 ## SYNTAX
 
 ```
-Remove-Database [-Server] <String> [-Database] <String> [[-Credential] <PSCredential>] [<CommonParameters>]
+Remove-Database [-Server] <String> [-Database] <String> [[-AuthenticationMethod] <String>]
+ [[-AuthenticationUser] <String>] [[-AuthenticationPassword] <String>]
+ [[-AuthenticationCredential] <PSCredential>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,8 +69,61 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Credential
-\[Optional\] A PSCredential object containing the credentials to connect to the AAS server.
+### -AuthenticationMethod
+Indicates which method to use to connect to the target SQL Server instance in order to deploy the database DacPac.
+Valid options are:
+
+    windows    - Windows authentication (default) will be used to deploy the DacPac to the target SQL Server instance
+    sqlauth    - SQL Server authentication will be used to deploy the DacPac to the target SQL Server instance
+    credential - Use a PSCredential to connect to the SQL Server instance
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: Windows
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthenticationUser
+UserID for the AuthenticationUser
+Only required if AuthenticationMethod = sqlauth
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthenticationPassword
+Password for the AuthenticationUser
+Only required if AuthenticationMethod = sqlauth
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthenticationCredential
+A PSCredential object containing the credentials to connect to the SQL Server instance
+Only required if AuthenticationMethod = credential
 
 ```yaml
 Type: PSCredential
@@ -76,7 +131,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

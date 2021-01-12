@@ -4,7 +4,7 @@ BeforeAll {
     Import-Module -Name $ModulePath;
 }
 
-Describe "Get-SqlDatabasePath" {
+Describe "Get-SqlDatabasePath" -Tag "Round1" {
     Context "Testing Inputs" {
         It "Should have Server as a mandatory parameter" {
             (Get-Command Get-SqlDatabasePath).Parameters['Server'].Attributes.mandatory | Should -BeTrue;

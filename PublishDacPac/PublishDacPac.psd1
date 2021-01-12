@@ -12,7 +12,7 @@
 RootModule = 'PublishDacPac.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.1.1'
+ModuleVersion = '1.1.2'
 
 # ID used to uniquely identify this module
 GUID = '12957ebe-7de8-4bf6-9b19-c07596b04f9f'
@@ -28,11 +28,10 @@ Copyright = 'Copyright (c) 2019-2021 Dr. John Tunnicliffe. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'
-Deploy a SQL Database DACPAC using a DAC Publish Profile
+Publish-DacPac allows you to deploy a SQL Server Database DacPac to a SQL Server instance using a DAC Publish Profile.  
+The target can be a on-premise SQL Server instance, an Azure managaged instance or an Azure SQL Database.
 
-Publish-DacPac allows you to deploy a SQL Server Database DACPAC to a SQL Server instance using a DAC Publish Profile.
-
-SSDT (SQL Server Data Tools) is Microsoft's tool to design (declare) the entire database model including tables, views, stored procedures, functions, schemas, etc. etc. etc. SSDT covering all aspects of a database design.
+SSDT (SQL Server Data Tools) is Microsoft's tool to design the entire database model including tables, views, stored procedures, functions, schemas, etc. etc. etc. SSDT covering all aspects of a database design.
 
 SSDT is now fully integrated into Visual Studio. When you perform a build of a SSDT Visual Studio project, it creates a DACPAC which defines all of the SQL Server objects - like tables, views, and instance objects, including logins - associated with a database.
 

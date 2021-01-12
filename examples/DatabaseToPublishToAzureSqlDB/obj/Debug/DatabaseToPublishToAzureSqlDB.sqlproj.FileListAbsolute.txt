@@ -1,0 +1,10 @@
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\bin\Debug\DatabaseToPublishToAzureSqlDB.dacpac
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\obj\Debug\DatabaseToPublishToAzure.dll
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\obj\Debug\DatabaseToPublishToAzure.pdb
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\bin\Debug\DatabaseToPublishToAzure.dll
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\bin\Debug\DatabaseToPublishToAzure.pdb
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\bin\Debug\DatabaseToPublishToAzure.Upgrade.publish.xml
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\obj\Debug\Model.xml
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\obj\Debug\refactor.xml
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\obj\Debug\postdeploy.sql
+C:\Dev\AzureDevOpsExtensionsForSqlServer\examples\DatabaseToPublishToAzureSqlDB\obj\Debug\predeploy.sql

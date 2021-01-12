@@ -4,7 +4,7 @@
     Import-Module -Name $ModulePath;
 }
 
-Describe "Ping-SqlDatabase" {
+Describe "Ping-SqlDatabase" -Tag "Round1" {
     Context "Testing Inputs" {
         It "Should have Server as a mandatory parameter" {
             (Get-Command Ping-SqlDatabase).Parameters['Server'].Attributes.mandatory | Should -BeTrue;

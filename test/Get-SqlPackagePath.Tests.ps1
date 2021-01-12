@@ -12,7 +12,7 @@
     ResetEnv;
 }
 
-Describe "Get-SqlPackagePath" {
+Describe "Get-SqlPackagePath" -Tag "Round1" {
 
     Context "Testing Inputs" {
         It "Should have Version as a mandatory parameter" {

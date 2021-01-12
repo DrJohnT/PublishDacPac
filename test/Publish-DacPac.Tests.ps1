@@ -21,6 +21,9 @@
 
         $data.Server = 'localhost';
 
+        $data.AuthenticationUser = "ea";
+        $data.AuthenticationPassword = "open";
+
         return $data;
     }
 
@@ -33,7 +36,7 @@
     ResetEnv;
 }
 
-Describe "Publish-DacPac" {
+Describe "Publish-DacPac" -Tag "Round1" {
     Context "Testing Inputs" {
         It "Should have DacPacPath as a mandatory parameter" {
             (Get-Command Publish-DacPac).Parameters['DacPacPath'].Attributes.mandatory | Should -BeTrue;
@@ -53,6 +56,22 @@ Describe "Publish-DacPac" {
         It "Should have SqlCmdVariables as an optional parameter" {
             (Get-Command Publish-DacPac).Parameters['SqlCmdVariables'].Attributes.mandatory | Should -BeFalse;
         }
+        It "Should have DeployScriptPath as an optional parameter" {
+            (Get-Command Publish-DacPac).Parameters['DeployScriptPath'].Attributes.mandatory | Should -BeFalse;
+        }
+        It "Should have AuthenticationMethod as an optional parameter" {
+            (Get-Command Publish-DacPac).Parameters['AuthenticationMethod'].Attributes.mandatory | Should -BeFalse;
+        }
+        It "Should have AuthenticationUser as an optional parameter" {
+            (Get-Command Publish-DacPac).Parameters['AuthenticationUser'].Attributes.mandatory | Should -BeFalse;
+        }
+        It "Should have AuthenticationPassword as an optional parameter" {
+            (Get-Command Publish-DacPac).Parameters['AuthenticationPassword'].Attributes.mandatory | Should -BeFalse;
+        }
+        It "Should have EncryptConnection as an optional parameter" {
+            (Get-Command Publish-DacPac).Parameters['EncryptConnection'].Attributes.mandatory | Should -BeFalse;
+        }
+
     }
 
     Context "Invalid SqlPackagePath" {
@@ -66,7 +85,7 @@ Describe "Publish-DacPac" {
 
     Context "Invalid Parameters" {
         <#
-        These have been removed as the error message bubbles up to Azure DevOps so that it says Partially Complete
+        These have been removed as the error message bubbles up to Azure DevOps so that it says "Partially Complete"
         It "Invalid DacPacPath path" {
             { Publish-DacPac -DacPacPath "NoDacPac" -DacPublishProfile "NoDacPublishProfile" -Server "MyServer" -Database "MyTestDBDacPacPath" -PreferredVersion latest } | Should -Throw;
         }
@@ -82,9 +101,15 @@ Describe "Publish-DacPac" {
         }
         #>
 
-        It "Invalid PreferredVersion Should -Throw;" {
+
+        It "Invalid PreferredVersion Should Throw;" {
             $data = Get-ConfigData;
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.DacProfile -Server $data.Server -Database "MyTestDB01" -PreferredVersion 312312 } | Should -Throw;
+        }
+
+        It "Invalid AuthenticationMethod Should Throw;" {
+            $data = Get-ConfigData;
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.DacProfile -Server $data.Server -Database "MyTestDB01" -PreferredVersion 312312 -AuthenticationMethod "dasds" } | Should -Throw;
         }
 
     }
@@ -111,28 +136,12 @@ Describe "Publish-DacPac" {
 
     }
 
-    Context "Valid parameters" {
-        <#
-        These have been removed as the error message bubbles up to Azure DevOps so that it says Partially Complete
-        It "SqlCmdVariables missing from DAC Profile so fails" {
-            $data = Get-ConfigData;
-            Write-Host "The following error is expected: 'An error occurred during deployment plan generation'" -ForegroundColor Yellow;
-            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.NoVarsDacProfilePath -Server $data.Server -Database 'MyTestDB06' } | Should -Throw;
-        }
-        #>
-        It "Valid parameters so deploy MyTestDB07 database" {
-            $data = Get-ConfigData;
-            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database "MyTestDB07" -PreferredVersion latest } | Should -Not -Throw;
-            { Remove-Database -Server $data.Server -Database "MyTestDB07" } | Should -Not -Throw;
-        }
-    }
-
-    Context "Test SqlCmdVariables" {
+    Context "Test SqlCmdVariables but Mocked Invoke-ExternalCommand so does not deploy" {
         
         It "Add ItemGroup and multiple values" {
             Mock -ModuleName PublishDacPac Invoke-ExternalCommand;
             $data = Get-ConfigData;
-            $Database = 'MyTestDB08';
+            $Database = 'MyTestDB09';
             [string[]]$sqlCmdValues = @();
             $sqlCmdValues += "StagingDBName=StagingDB08"
             $sqlCmdValues += "StagingDBServer=localhost08"
@@ -147,7 +156,7 @@ Describe "Publish-DacPac" {
         It "Update one value" {
             Mock -ModuleName PublishDacPac Invoke-ExternalCommand;
             $data = Get-ConfigData;
-            $Database = 'MyTestDB09';
+            $Database = 'MyTestDB10';
             [string[]]$sqlCmdValues = @();
             $sqlCmdValues += "StagingDBName=StagingDB09"
             Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -SqlCmdVariables $sqlCmdValues;
@@ -159,7 +168,7 @@ Describe "Publish-DacPac" {
         It "Update two values" {
             Mock -ModuleName PublishDacPac Invoke-ExternalCommand;
             $data = Get-ConfigData;
-            $Database = 'MyTestDB10';
+            $Database = 'MyTestDB11';
             [string[]]$sqlCmdValues = @();
             $sqlCmdValues += "StagingDBName=StagingDB10";
             $sqlCmdValues += "StagingDBServer=localhost10";
@@ -172,7 +181,7 @@ Describe "Publish-DacPac" {
         It "Add new SqlCmdVariable" {
             Mock -ModuleName PublishDacPac Invoke-ExternalCommand;
             $data = Get-ConfigData;
-            $Database = 'MyTestDB11';
+            $Database = 'MyTestDB12';
             [string[]]$sqlCmdValues = @();
             $sqlCmdValues += "StagingDBName=StagingDB11";
             $sqlCmdValues += "StagingDBServer=localhost11";
@@ -182,9 +191,62 @@ Describe "Publish-DacPac" {
             $filePath = "$DacPacFolder\$Database.deploy.publish.xml";
             (Test-Path -Path $filePath) | Should -BeTrue;
         }
+    }
+
+    Context "Valid parameters" {
+        <#
+        These have been removed as the error message bubbles up to Azure DevOps so that it says Partially Complete
+        It "SqlCmdVariables missing from DAC Profile so fails" {
+            $data = Get-ConfigData;
+            Write-Host "The following error is expected: 'An error occurred during deployment plan generation'" -ForegroundColor Yellow;
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.NoVarsDacProfilePath -Server $data.Server -Database 'MyTestDB06' } | Should -Throw;
+        }
+        #>
+
+        
+        It "Valid parameters so deploy database" {
+            $data = Get-ConfigData;
+            $Database = "MyTestDB31";
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
+            { Remove-Database -Server $data.Server -Database $Database } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
+        }
+
+        It "Deploy MyTestDB08 using SQL Server authentication" {
+            $data = Get-ConfigData;
+            $Database = "MyTestDB32";
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest -AuthenticationMethod sqlauth -AuthenticationUser $data.AuthenticationUser -AuthenticationPassword $data.AuthenticationPassword } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
+            { Remove-Database -Server $data.Server -Database $Database -AuthenticationMethod sqlauth -AuthenticationUser $data.AuthenticationUser -AuthenticationPassword $data.AuthenticationPassword } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
+        }
+
+        It "Define a DeployScriptPath and check it was created" {
+            $data = Get-ConfigData;
+            $Database = "MyTestDB33";
+            $DeployScriptPath = New-Guid;
+            $DeployScriptPath = "$Database-$DeployScriptPath";
+            $DeployScriptPath = Join-Path $data.DacPacFolder "$DeployScriptPath.sql"            
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest -DeployScriptPath $DeployScriptPath } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
+            ( Test-Path $DeployScriptPath ) | Should -BeTrue;
+        }
+
+        It "Define a DeployReportPath and check it was created" {
+            $data = Get-ConfigData;
+            $Database = "MyTestDB34";
+            $DeployReportPath = New-Guid;
+            $DeployReportPath = "$Database-$DeployReportPath";
+            $DeployReportPath = Join-Path $data.DacPacFolder "$DeployReportPath.xml"            
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest -DeployReportPath $DeployReportPath } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
+            { Remove-Database -Server $data.Server -Database $Database } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
+            ( Test-Path $DeployReportPath ) | Should -BeTrue;
+        }
 
     }
- 
 }
 
 AfterAll {

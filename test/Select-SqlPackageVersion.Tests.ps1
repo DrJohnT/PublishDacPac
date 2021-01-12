@@ -12,7 +12,7 @@
     ResetEnv;
 }
 
-Describe "Select-SqlPackageVersion" {
+Describe "Select-SqlPackageVersion" -Tag "Round1" {
 
     It "Finds latest version" {
         Select-SqlPackageVersion -PreferredVersion 'latest' | Should -Be 15

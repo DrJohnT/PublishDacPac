@@ -19,14 +19,15 @@ BeforeAll {
         
         $data.AltDacProfilePath = Resolve-Path "$DacPacFolder\DatabaseToPublish.LOCAL.publish.xml";
         $data.NoVarsDacProfilePath = Resolve-Path "$DacPacFolder\DatabaseToPublish.NoVars.publish.xml";
-
+        $data.AuthenticationUser = "ea";
+        $data.AuthenticationPassword = "open";
         $data.Server = 'localhost';
 
         return $data;
     }
 }
 
-Describe "Remove-Database" {
+Describe "Remove-Database" -Tag "Round1" {
     
     Context "Testing Inputs" {
          It "Should have Server as a mandatory parameter" {
@@ -56,9 +57,21 @@ Describe "Remove-Database" {
         It "Deploy and remove database" {
             $data = Get-ConfigData;
             $database = New-GUID;           
-
+            $database = "RemoveDB-Test-$database";
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $database -PreferredVersion latest } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
             { Remove-Database -Server $data.Server -Database $database } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
+        }
+
+        It "Deploy and remove database using SQL Authentication" {
+            $data = Get-ConfigData;
+            $database = New-GUID;           
+            $database = "RemoveDB-Test-$database";
+            { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $database -PreferredVersion latest } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
+            { Remove-Database -Server $data.Server -Database $Database -AuthenticationMethod sqlauth -AuthenticationUser $data.AuthenticationUser -AuthenticationPassword $data.AuthenticationPassword } | Should -Not -Throw;
+            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
         }
     }   
     

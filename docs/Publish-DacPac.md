@@ -8,22 +8,26 @@ schema: 2.0.0
 # Publish-DacPac
 
 ## SYNOPSIS
-Publish-DacPac allows you to deploy a SQL Server Database using a DACPAC to a SQL Server instance.
+Publish-DacPac allows you to deploy a SQL Server Database using a DacPac to a SQL Server instance.
 
 ## SYNTAX
 
 ```
 Publish-DacPac [-DacPacPath] <String> [-DacPublishProfile] <String> [-Server] <String> [[-Database] <String>]
- [[-SqlCmdVariables] <String[]>] [[-PreferredVersion] <String>] [<CommonParameters>]
+ [[-SqlCmdVariables] <String[]>] [[-PreferredVersion] <String>] [[-DeployScriptPath] <String>]
+ [[-DeployReportPath] <String>] [[-AuthenticationMethod] <String>] [[-AuthenticationUser] <String>]
+ [[-AuthenticationPassword] <String>] [[-EncryptConnection] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Publishes a SSDT DacPac using a specified DacPac publish profile from your solution.
-Basically deploys the DACPAC by invoking SqlPackage.exe using a DacPac Publish profile.
+Basically deploys the DacPac by invoking SqlPackage.exe using a DacPac Publish profile.
+The SqlPackage.exe publish operation incrementally updates the schema of a target database to match the structure of a source database. 
 
 Note that the XML of the DAC Publish Profile will updated with the Server, Database and SqlCmdVariables variables and a new file written to same folder as the DACPAC called
 "$Database.deploy.publish.xml" where $Database is the value passed to the -Database parameter.
 
+More information on SqlPackage.exe can be found here: https://docs.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage
 This module requires SqlPackage.exe to be installed on the host machine.
 See https://docs.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage-download
 
@@ -182,6 +186,104 @@ Aliases:
 Required: False
 Position: 6
 Default value: Latest
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeployScriptPath
+Specifies an optional file path to output the deployment script.
+For Azure deployments, if there are T-SQL commands to create or modify the master database, a script will be written to the same path but with "Filename_Master.sql" as the output file name.
+Note that providing the DeployScriptPath parameter will cause SqlPackage.exe to be called with the /Action:Script parameter and the database will NOT be deployed but scripted out.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeployReportPath
+Specifies an optional file path to output the deployment report xml file.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 8
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthenticationMethod
+Indicates which method to use to connect to the target SQL Server instance in order to deploy the database DacPac.
+Valid options are:
+
+    windows - Windows authentication (default) will be used to deploy the DacPac to the target SQL Server instance
+    sqlauth - SQL Server authentication will be used to deploy the DacPac to the target SQL Server instance either on-premise or in Azure
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 9
+Default value: Windows
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthenticationUser
+UserID for the AuthenticationUser
+Only required if AuthenticationMethod = sqlauth
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 10
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AuthenticationPassword
+Password for the AuthenticationUser
+Only required if AuthenticationMethod = sqlauth
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 11
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -EncryptConnection
+Specifies if SQL encryption should be used for the target database connection.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 12
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
