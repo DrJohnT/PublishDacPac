@@ -5,3 +5,5 @@
 *.vs
 examples/DatabaseToPublish/bin/*
 examples/DatabaseToPublish/obj/*
+examples/DatabaseToPublishToAzureSqlDB/bin/*
+examples/DatabaseToPublishToAzureSqlDB/obj/*
