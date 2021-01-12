@@ -78,7 +78,9 @@
     <None Include="DatabaseToPublish.LOCAL.publish.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="DatabaseToPublish.NoVars.publish.xml" />
+    <None Include="DatabaseToPublish.NoVars.publish.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="StagingDBName">
