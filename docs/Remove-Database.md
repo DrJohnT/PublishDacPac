@@ -32,7 +32,7 @@ Connects to the server localhost to remove the database MyTestDB
 
 ### EXAMPLE 2
 ```
-Remove-Database -Server 'localhost' -Database 'MyTestDB' -Credential myCred
+Remove-Database -Server 'localhost' -Database 'MyTestDB' -AuthenticationCredential myCred
 ```
 
 Connects to the server localhost using the credential supplied in myCred to remove the database MyTestDB

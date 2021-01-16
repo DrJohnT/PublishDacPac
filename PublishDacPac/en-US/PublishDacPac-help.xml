@@ -1102,7 +1102,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Remove-Database -Server 'localhost' -Database 'MyTestDB' -Credential myCred</dev:code>
+        <dev:code>Remove-Database -Server 'localhost' -Database 'MyTestDB' -AuthenticationCredential myCred</dev:code>
         <dev:remarks>
           <maml:para>Connects to the server localhost using the credential supplied in myCred to remove the database MyTestDB</maml:para>
         </dev:remarks>
