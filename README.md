@@ -7,8 +7,7 @@
 
 ## Overview
 
-**Publish-DacPac** allows you to deploy a SQL Server Database DacPac to a SQL Server instance using a DAC Publish Profile.  
-The target can be a on-premise SQL Server instance, an Azure managaged instance or an Azure SQL Database.
+**Publish-DacPac** allows you to deploy a SQL Server Database DacPac to a SQL Server instance using a DAC Publish Profile.  The target can be a on-premise SQL Server instance, an Azure SQL Managed Instance or an Azure SQL Database.
 
 SSDT (SQL Server Data Tools) is Microsoft's tool to design the entire database model including tables, views, stored procedures, functions, schemas, etc. etc. etc.  SSDT covering **all** aspects of a database design.
 

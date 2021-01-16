@@ -7,13 +7,13 @@ BeforeAll {
 
         $data = @{};
 
-        if ("" -eq "$Env:AzureSqlServer")
+        if ("" -eq "$Env:AzureSqlUserID")
         {
-            throw "AzureSqlServer environment variable is not set!";
+            throw "Azure AuthenticationUser variable is not set!";
             return $data;
         }
         $data.Server = $Env:AzureSqlServer;
-        $data.Database = 'DatabaseToPublish';
+        $data.Database = $Env:AzureSqlDatabase;
         $data.AuthenticationUser = $Env:AzureSqlUserID;
         $data.AuthenticationPassword = $Env:AzureSqlPassword;
 

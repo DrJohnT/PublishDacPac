@@ -36,8 +36,14 @@ Describe "Remove-Database" -Tag "Round1" {
         It "Should have Database as an mandatory parameter" {
             (Get-Command Remove-Database).Parameters['Database'].Attributes.mandatory | Should -BeTrue;
         }
-        It "Should have Credential as an optional parameter" {
-            (Get-Command Remove-Database).Parameters['Credential'].Attributes.mandatory | Should -BeFalse;
+        It "Should have AuthenticationUser as an optional parameter" {
+            (Get-Command Remove-Database).Parameters['AuthenticationUser'].Attributes.mandatory | Should -BeFalse;
+        }
+        It "Should have AuthenticationPassword as an optional parameter" {
+            (Get-Command Remove-Database).Parameters['AuthenticationPassword'].Attributes.mandatory | Should -BeFalse;
+        }
+        It "Should have AuthenticationCredential as an optional parameter" {
+            (Get-Command Remove-Database).Parameters['AuthenticationCredential'].Attributes.mandatory | Should -BeFalse;
         }
     }
 

@@ -28,12 +28,13 @@ Copyright = 'Copyright (c) 2019-2021 Dr. John Tunnicliffe. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'
-Publish-DacPac allows you to deploy a SQL Server Database DacPac to a SQL Server instance using a DAC Publish Profile.  
-The target can be a on-premise SQL Server instance, an Azure managaged instance or an Azure SQL Database.
+Publish-DacPac allows you to deploy a SQL Server Database DacPac to a SQL Server instance using a DAC Publish Profile.  The target can be a on-premise SQL Server instance, an Azure SQL Managed Instance or an Azure SQL Database.
 
-SSDT (SQL Server Data Tools) is Microsoft's tool to design the entire database model including tables, views, stored procedures, functions, schemas, etc. etc. etc. SSDT covering all aspects of a database design.
+# What's New
 
-SSDT is now fully integrated into Visual Studio. When you perform a build of a SSDT Visual Studio project, it creates a DACPAC which defines all of the SQL Server objects - like tables, views, and instance objects, including logins - associated with a database.
+This release provides support for deployment to an Azure SQL Managed Instance or an Azure SQL Database.  Such deployments require a username/password combination to connect to the Azure SQL service.  Simply select *SQL Server or Azure SQL Authentication* in the **Authentication Method** dropdown and enter your Azure username and password.  Remember to use a secured variable for your password!
+
+Encrypted connections for database deployment are now supported.
 
 Publish-DacPac simplifies the use of SqlPackage.exe to deploy a DACPAC by using a DAC Publish Profile which provides for fine-grained control over the database creation and upgrades, including upgrades for schema, triggers, stored procedures, roles, users, extended properties etc. Using a DAC Publish Profile, multiple different properties can be set to ensure that the database is created or upgraded properly.
 
@@ -41,7 +42,7 @@ Publish-DacPac compares the content of a DACPAC to the database already on the t
 
 Publish-DacPac can be used to automate the deployment of databases, either as part of a build in Azure DevOps, or part of a server deployment using Octopus Deploy or Azure DevOps Release Manager.
 
-To automate build and deployment of databases in Azure DevOps, you can use MsBuild to create DACPAC from your Visual Studio solution. You can then add a PowerShell task which uses Publish-DacPac to invoke SQLPackage.exe to deploy each DACPAC using your own custom DAC Publish Profile.
+To automate build and deployment of databases in Azure DevOps, you can use VsBuild to create DACPAC from your Visual Studio solution. You can then add a PowerShell task which uses Publish-DacPac to invoke SQLPackage.exe to deploy each DACPAC using your own custom DAC Publish Profile.
 
 Full documentation can be found on our project site https://github.com/DrJohnT/PublishDacPac
 '@

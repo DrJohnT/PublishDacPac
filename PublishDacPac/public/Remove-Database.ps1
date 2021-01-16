@@ -38,7 +38,7 @@ function Remove-Database {
     Connects to the server localhost to remove the database MyTestDB
 
     .EXAMPLE
-    Remove-Database -Server 'localhost' -Database 'MyTestDB' -Credential myCred
+    Remove-Database -Server 'localhost' -Database 'MyTestDB' -AuthenticationCredential myCred
 
     Connects to the server localhost using the credential supplied in myCred to remove the database MyTestDB
 
@@ -74,18 +74,21 @@ function Remove-Database {
         $AuthenticationCredential
     )
 
-    $sqlCmd = "drop database [$Database]";
-    switch ($AuthenticationMethod) {
-           'windows' {
-                Invoke-Sqlcmd -Server $Server -Database 'master' -Query $sqlCmd -ErrorAction Stop;
-            }
-            'sqlauth' {
-                Invoke-Sqlcmd -Server $Server -Database 'master' -Query $sqlCmd -ErrorAction Stop -Username $AuthenticationUser -Password $AuthenticationPassword;
-            }
-            'credential' {
-                Invoke-Sqlcmd -Server $Server -Database 'master' -Query $sqlCmd -ErrorAction Stop -Credential $Credential;
-            }
+    # Now Invoke-Sqlcmd
+    $Command = "Invoke-Sqlcmd -ServerInstance '$Server' -Database 'master' -Query 'drop database [$Database]' -OutputSqlErrors 1 -ErrorAction Stop";
+   
+    if ($AuthenticationMethod -eq 'sqlauth') { 
+        [SecureString] $SecurePassword = ConvertTo-SecureString $AuthenticationPassword -AsPlainText -Force;
+        [PsCredential] $AuthenticationCredential = New-Object System.Management.Automation.PSCredential($AuthenticationUser, $SecurePassword);
+        $Command += ' -Credential $AuthenticationCredential';
     }
-    
+
+    $scriptBlock = [Scriptblock]::Create($Command);  
+
+    if ($AuthenticationMethod -eq 'sqlauth' -or $AuthenticationMethod -eq 'credential') {            
+        Invoke-Command -ScriptBlock $scriptBlock -ArgumentList $AuthenticationCredential;
+    } else {            
+        Invoke-Command -ScriptBlock $scriptBlock;
+    }            
 }
 New-Alias -Name Remove-Database -Value Unpublish-Database;

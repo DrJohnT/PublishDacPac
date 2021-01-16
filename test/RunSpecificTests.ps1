@@ -14,7 +14,8 @@ write-host $output
 Remove-Module -Name PublishDacPac;
 #>
 
-#Invoke-Pester 
+Invoke-Pester -Tag "Round1";  # only one Round in these tests
+
 #Invoke-Pester -Script .\AnalyzePSScripts.Tests.ps1
 #Invoke-Pester -Script .\Find-SqlPackageLocations.Tests.ps1
 #Invoke-Pester -Script .\Get-SqlPackagePath.Tests.ps1
@@ -26,10 +27,7 @@ Remove-Module -Name PublishDacPac;
 
 #Invoke-Pester -Script .\Remove-Database.Tests.ps1
 
-$Env:AzureSqlServer   = "bovi1kenobi.database.windows.net,1433"; 
-$Env:AzureSqlUserID   = "bovi"; 
-$Env:AzureSqlPassword = "LetMeSql!";
-Invoke-Pester -Script .\Publish-DacPacToAzure.Tests.ps1
+
 
 
 
