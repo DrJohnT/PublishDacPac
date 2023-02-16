@@ -172,6 +172,7 @@ Use 'latest' for the latest version, or do not provide the parameter at all.
 Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
 
     latest = use the latest version of SqlPackage.exe
+    16 = SQL Server 2022
     15 = SQL Server 2019
     14 = SQL Server 2017
     13 = SQL Server 2016
@@ -297,7 +298,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 Written by (c) Dr.
-John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+John Tunnicliffe, 2019-2023 https://github.com/DrJohnT/PublishDacPac
 This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
