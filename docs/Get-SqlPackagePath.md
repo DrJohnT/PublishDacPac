@@ -53,8 +53,9 @@ Return the full path to a latest version of SqlPackage.exe
 
 ### -Version
 Defines the specific version of SqlPackage.exe to which you wish to obtain the path.
-Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:
+Valid values for -Version are: ('16', '15', '14', '13', '12', '11') which translate as follows:
 
+* 16: SQL Server 2022
 * 15: SQL Server 2019
 * 14: SQL Server 2017
 * 13: SQL Server 2016
@@ -85,7 +86,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### The full path to the specific version of SqlPackage.exe you requested
 ## NOTES
 Written by (c) Dr.
-John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+John Tunnicliffe, 2019-2023 https://github.com/DrJohnT/PublishDacPac
 This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
