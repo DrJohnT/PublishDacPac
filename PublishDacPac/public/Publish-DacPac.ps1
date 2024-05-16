@@ -50,6 +50,7 @@
     Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
 
         latest = use the latest version of SqlPackage.exe
+        16 = SQL Server 2022
         15 = SQL Server 2019
         14 = SQL Server 2017
         13 = SQL Server 2016
@@ -136,7 +137,7 @@
         $SqlCmdVariables,
 
         [String] [Parameter(Mandatory = $false)]
-        [ValidateSet('150', '140', '130', '120', '110', '15', '14', '13', '12', '11', 'latest')]
+        [ValidateSet('150', '140', '130', '120', '110', '16', '15', '14', '13', '12', '11', 'latest')]
         $PreferredVersion = 'latest',
 
         [String] [Parameter(Mandatory = $false)]        
