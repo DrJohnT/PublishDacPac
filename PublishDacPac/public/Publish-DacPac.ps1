@@ -47,9 +47,12 @@
 
     .PARAMETER PreferredVersion
     Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all.
-    Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
+    It is recommended you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
+
+    Valid values for -Version are:
 
         latest = use the latest version of SqlPackage.exe
+        17 = SQL Server 2025
         16 = SQL Server 2022
         15 = SQL Server 2019
         14 = SQL Server 2017
@@ -110,7 +113,7 @@
     https://github.com/DrJohnT/PublishDacPac
 
 	.NOTES
-    Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+    Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
     This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 #>
@@ -137,7 +140,7 @@
         $SqlCmdVariables,
 
         [String] [Parameter(Mandatory = $false)]
-        [ValidateSet('150', '140', '130', '120', '110', '16', '15', '14', '13', '12', '11', 'latest')]
+        [ValidateSet('17', '16', '15', '14', '13', '12', '11', 'latest')]
         $PreferredVersion = 'latest',
 
         [String] [Parameter(Mandatory = $false)]        

@@ -27,6 +27,10 @@ function Remove-Database {
     .PARAMETER AuthenticationPassword
     Password for the AuthenticationUser
     Only required if AuthenticationMethod = sqlauth
+
+    .PARAMETER TrustServerCertificate
+    If set to $true, the connection to the SQL Server instance will trust the server certificate.
+    This is useful if you are using a self-signed certificate for the SQL Server instance.  
     
     .PARAMETER AuthenticationCredential
     A PSCredential object containing the credentials to connect to the SQL Server instance
@@ -46,7 +50,7 @@ function Remove-Database {
     https://github.com/DrJohnT/PublishDacPac
 
     .NOTES
-    Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+    Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
     This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 #>
     [CmdletBinding()]
@@ -71,16 +75,23 @@ function Remove-Database {
         $AuthenticationPassword,
 
         [PSCredential] [Parameter(Mandatory = $false)]
-        $AuthenticationCredential
+        $AuthenticationCredential,
+
+        [boolean] [Parameter(Mandatory = $false)]
+        $TrustServerCertificate = $true
     )
 
     # Now Invoke-Sqlcmd
-    $Command = "Invoke-Sqlcmd -ServerInstance '$Server' -Database 'master' -Query 'drop database [$Database]' -OutputSqlErrors 1 -ErrorAction Stop";
+    $Command = "Invoke-Sqlcmd -ServerInstance:'$Server' -Database:'master' -Query:'drop database [$Database]' -OutputSqlErrors:1 -ErrorAction:Stop";
    
     if ($AuthenticationMethod -eq 'sqlauth') { 
         [SecureString] $SecurePassword = ConvertTo-SecureString $AuthenticationPassword -AsPlainText -Force;
         [PsCredential] $AuthenticationCredential = New-Object System.Management.Automation.PSCredential($AuthenticationUser, $SecurePassword);
         $Command += ' -Credential $AuthenticationCredential';
+    }
+
+    if ($TrustServerCertificate) {
+        $Command += ' -TrustServerCertificate:$true';
     }
 
     $scriptBlock = [Scriptblock]::Create($Command);  

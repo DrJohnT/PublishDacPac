@@ -24,7 +24,7 @@ Author = 'Dr. John Tunnicliffe'
 CompanyName = 'Decision Analytics'
 
 # Copyright statement for this module
-Copyright = 'Copyright (c) 2019-2021 Dr. John Tunnicliffe. All rights reserved.'
+Copyright = 'Copyright (c) 2019-2025 Dr. John Tunnicliffe. All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = @'

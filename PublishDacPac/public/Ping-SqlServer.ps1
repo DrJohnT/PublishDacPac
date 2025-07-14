@@ -21,7 +21,7 @@ function Ping-SqlServer {
     https://github.com/DrJohnT/PublishDacPac
 
 	.NOTES
-    Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+    Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
     This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 #>
 	[OutputType([Boolean])]

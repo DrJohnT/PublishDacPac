@@ -1,5 +1,8 @@
 ﻿# How to format results https://devblogs.microsoft.com/scripting/psscriptanalyzer-deep-dive-part-3-of-4/
 
+# Install module using: 
+# Install-Module -Name PSScriptAnalyzer -Force
+
 #region PSScriptAnalyzer Testing
 Describe 'Checking scripts against PSScriptAnalyzer rules' -Tag "Round1" {
     Context 'PSScriptAnalyzer Standard Rules' {

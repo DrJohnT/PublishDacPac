@@ -15,29 +15,35 @@
 Describe "Select-SqlPackageVersion" -Tag "Round1" {
 
     It "Finds latest version" {
-        Select-SqlPackageVersion -PreferredVersion 'latest' | Should -Be 15
+        Select-SqlPackageVersion -PreferredVersion 'latest' | Should -Be 17
+    }
+
+    It "Finds version 17" {
+        Select-SqlPackageVersion -PreferredVersion 17 | Should -Be 17
     }
     
-    It "Finds version 15" {
-        Select-SqlPackageVersion -PreferredVersion 15 | Should -Be 15
+    It "Finds version 16" {
+        Select-SqlPackageVersion -PreferredVersion 16 | Should -Be 16
+    }
+
+    It "15 finds version 17" {
+        Select-SqlPackageVersion -PreferredVersion 15 | Should -Be 17
     }
     
-    It "150 Finds version 15" {
-        Select-SqlPackageVersion -PreferredVersion 150 | Should -Be 150
-    }
     It "Finds version 14" {
         Select-SqlPackageVersion -PreferredVersion 14 | Should -Be 14
     }
-    It "Does not find version 13 so should return 15 (latest)" {
-        Select-SqlPackageVersion -PreferredVersion 13 | Should -Be 15
+
+    It "Does not find version 13 so should return 16 (latest)" {
+        Select-SqlPackageVersion -PreferredVersion 13 | Should -Be 17
     }
 
-    It "Does not find version 12 so should return 15 (latest)" {
-        Select-SqlPackageVersion -PreferredVersion 12 | Should -Be 15
+    It "Does not find version 12 so should return 17 (latest)" {
+        Select-SqlPackageVersion -PreferredVersion 12 | Should -Be 17
     }
 
-    It "Does not find version 11 so should return 15 (latest)" {
-        Select-SqlPackageVersion -PreferredVersion 11 | Should -Be 15;
+    It "Does not find version 11 so should return 17 (latest)" {
+        Select-SqlPackageVersion -PreferredVersion 11 | Should -Be 17;
     }
 
     It "Unsupported version 10 so Should -Throw;" {

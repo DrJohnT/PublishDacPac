@@ -22,14 +22,16 @@ function Get-SqlPackagePath {
 
     .PARAMETER Version
     Defines the specific version of SqlPackage.exe to which you wish to obtain the path.
-    Valid values for -Version are: ('16', '15', '14', '13', '12', '11') which translate as follows:
+    Valid values for -Version are:
 
-    * 16: SQL Server 2022
-    * 15: SQL Server 2019
-    * 14: SQL Server 2017
-    * 13: SQL Server 2016
-    * 12: SQL Server 2014
-    * 11: SQL Server 2012
+        latest = use the latest version of SqlPackage.exe
+        17 = SQL Server 2025
+        16 = SQL Server 2022
+        15 = SQL Server 2019
+        14 = SQL Server 2017
+        13 = SQL Server 2016
+        12 = SQL Server 2014
+        11 = SQL Server 2012
 
     If you are unsure which version(s) of SqlPackage.exe you have installed, use the function **Find-SqlPackageLocations** to obtain a full list.
 
@@ -50,14 +52,16 @@ function Get-SqlPackagePath {
     https://github.com/DrJohnT/PublishDacPac
 
     .NOTES
-    Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+    Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
     This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
+    Install SqlPackage.exe from https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage
+    SqlPackage.exe will also be installed with Visual Studio.
 #>
     [OutputType([string])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [ValidateSet('150', '140', '130', '120', '110', '16', '15', '14', '13', '12', '11')]
+        [ValidateSet('17', '16', '15', '14', '13', '12', '11')]
         [string]$Version
     )
 

@@ -10,9 +10,10 @@ function Select-SqlPackageVersion {
 
     .PARAMETER PreferredVersion
     Defines the preferred version of SqlPackage.exe you wish to find.  Use 'latest' for the latest version, or do not provide the parameter.
-    Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:
+    Valid values for -Version are:
 
         latest = use the latest version of SqlPackage.exe
+        17 = SQL Server 2025
         16 = SQL Server 2022
         15 = SQL Server 2019
         14 = SQL Server 2017
@@ -39,20 +40,20 @@ function Select-SqlPackageVersion {
     https://github.com/DrJohnT/PublishDacPac
 
     .NOTES
-    Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+    Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
     This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT    
 #>
     [OutputType([string])]
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
-        [ValidateSet('150', '140', '130', '120', '110', '16', '15', '14', '13', '12', '11', 'latest')]
+        [ValidateSet('17', '16', '15', '14', '13', '12', '11', 'latest')]
         [string] $PreferredVersion
     )
 
     try {
         $specificVersion = $PreferredVersion -and $PreferredVersion -ne 'latest';
-        $versions = '16', '15', '14', '13', '12', '11' | Where-Object { $_ -ne $PreferredVersion }
+        $versions = '17', '16', '15', '14', '13', '12', '11' | Where-Object { $_ -ne $PreferredVersion }
 
         # Look for a specific version of Microsoft SQL Server SqlPackage.exe
         if ($specificVersion) {

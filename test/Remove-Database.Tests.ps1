@@ -45,6 +45,9 @@ Describe "Remove-Database" -Tag "Round1" {
         It "Should have AuthenticationCredential as an optional parameter" {
             (Get-Command Remove-Database).Parameters['AuthenticationCredential'].Attributes.mandatory | Should -BeFalse;
         }
+        It "Should have -TrustServerCertificate as an optional parameter" {
+            (Get-Command Remove-Database).Parameters['TrustServerCertificate'].Attributes.mandatory | Should -BeFalse;
+        }
     }
 
     Context "Invalid Parameters" {

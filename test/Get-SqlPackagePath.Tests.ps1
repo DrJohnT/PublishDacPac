@@ -21,8 +21,16 @@ Describe "Get-SqlPackagePath" -Tag "Round1" {
     }
 
     Context "Finds SqlPackage.exe version" {
+        It "Finds SqlPackage.exe version 17" {
+            ( Get-SqlPackagePath -Version 17 ) -like "*SqlPackage.exe" | Should -BeTrue;
+        }
+
+        It "Finds SqlPackage.exe version 16" {
+            ( Get-SqlPackagePath -Version 16 ) -like "*SqlPackage.exe" | Should -BeTrue;
+        }
+
         It "Finds SqlPackage.exe version 15" {
-            ( Get-SqlPackagePath -Version 15 ) -like "*SqlPackage.exe" | Should -BeTrue;
+            ( Get-SqlPackagePath -Version 15 ) -like "*SqlPackage.exe" | Should -BeFalse;
         }
 
         It "Finds SqlPackage.exe version 14" {
