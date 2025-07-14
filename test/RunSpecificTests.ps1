@@ -20,8 +20,6 @@ Invoke-Pester -Tag "Round1";  # only one Round in these tests
 #Invoke-Pester -Script .\Find-SqlPackageLocations.Tests.ps1
 #Invoke-Pester -Script .\Get-SqlPackagePath.Tests.ps1
 #Invoke-Pester -Script .\Select-SqlPackageVersion.Tests.ps1
-#Invoke-Pester -Script .\Ping-SqlServer.Tests.ps1
-#Invoke-Pester -Script .\Ping-SqlDatabase.Tests.ps1
 
 #Invoke-Pester -Script .\Publish-DacPac.Tests.ps1
 

@@ -68,9 +68,7 @@ Describe "Remove-Database" -Tag "Round1" {
             $database = New-GUID;           
             $database = "RemoveDB-Test-$database";
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $database -PreferredVersion latest } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
             { Remove-Database -Server $data.Server -Database $database } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
         }
 
         It "Deploy and remove database using SQL Authentication" {
@@ -78,9 +76,7 @@ Describe "Remove-Database" -Tag "Round1" {
             $database = New-GUID;           
             $database = "RemoveDB-Test-$database";
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $database -PreferredVersion latest } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
             { Remove-Database -Server $data.Server -Database $Database -AuthenticationMethod sqlauth -AuthenticationUser $data.AuthenticationUser -AuthenticationPassword $data.AuthenticationPassword } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
         }
     }   
     

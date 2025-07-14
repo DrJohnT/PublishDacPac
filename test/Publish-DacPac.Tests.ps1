@@ -208,18 +208,14 @@ Describe "Publish-DacPac" -Tag "Round1" {
             $data = Get-ConfigData;
             $Database = "MyTestDB31";
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
             { Remove-Database -Server $data.Server -Database $Database } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
         }
 
         It "Deploy MyTestDB08 using SQL Server authentication" {
             $data = Get-ConfigData;
             $Database = "MyTestDB32";
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest -AuthenticationMethod sqlauth -AuthenticationUser $data.AuthenticationUser -AuthenticationPassword $data.AuthenticationPassword } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
             { Remove-Database -Server $data.Server -Database $Database -AuthenticationMethod sqlauth -AuthenticationUser $data.AuthenticationUser -AuthenticationPassword $data.AuthenticationPassword } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
         }
 
         It "Define a DeployScriptPath and check it was created" {
@@ -229,7 +225,6 @@ Describe "Publish-DacPac" -Tag "Round1" {
             $DeployScriptPath = "$Database-$DeployScriptPath";
             $DeployScriptPath = Join-Path $data.DacPacFolder "$DeployScriptPath.sql"            
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest -DeployScriptPath $DeployScriptPath } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
             ( Test-Path $DeployScriptPath ) | Should -BeTrue;
         }
 
@@ -240,9 +235,7 @@ Describe "Publish-DacPac" -Tag "Round1" {
             $DeployReportPath = "$Database-$DeployReportPath";
             $DeployReportPath = Join-Path $data.DacPacFolder "$DeployReportPath.xml"            
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.AltDacProfilePath -Server $data.Server -Database $Database -PreferredVersion latest -DeployReportPath $DeployReportPath } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeTrue;
             { Remove-Database -Server $data.Server -Database $Database } | Should -Not -Throw;
-            ( Ping-SqlDatabase -Server $data.Server -Database $Database ) | Should -BeFalse;
             ( Test-Path $DeployReportPath ) | Should -BeTrue;
         }
 

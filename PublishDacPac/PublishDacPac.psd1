@@ -56,8 +56,6 @@ FunctionsToExport = @(
     'Get-SqlDatabasePath',
     'Get-SqlPackagePath',
     'Invoke-ExternalCommand',
-    'Ping-SqlDatabase',
-    'Ping-SqlServer',
     'Publish-DacPac',
     'Select-SqlPackageVersion',
     'Remove-Database'
