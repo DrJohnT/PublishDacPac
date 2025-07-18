@@ -15,7 +15,7 @@ Removes (Drops) the specified SQL database
 ```
 Remove-Database [-Server] <String> [-Database] <String> [[-AuthenticationMethod] <String>]
  [[-AuthenticationUser] <String>] [[-AuthenticationPassword] <String>]
- [[-AuthenticationCredential] <PSCredential>] [<CommonParameters>]
+ [[-AuthenticationCredential] <PSCredential>] [[-TrustServerCertificate] <Boolean>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -96,7 +96,7 @@ Only required if AuthenticationMethod = sqlauth
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Username, UserID
 
 Required: False
 Position: 4
@@ -112,7 +112,7 @@ Only required if AuthenticationMethod = sqlauth
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Password
 
 Required: False
 Position: 5
@@ -137,6 +137,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -TrustServerCertificate
+If set to $true, the connection to the SQL Server instance will trust the server certificate.
+This is useful if you are using a self-signed certificate for the SQL Server instance.
+
+```yaml
+Type: Boolean
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: True
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -144,9 +160,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### Returns $true if the database is deleted, $false otherwise.
 ## NOTES
 Written by (c) Dr.
-John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
 This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS

@@ -41,7 +41,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -77,9 +77,9 @@
         <maml:name>Get-SqlDatabasePath</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Server</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Name of the SSAS server, including instance and port if required.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -89,9 +89,9 @@
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Database</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>{{ Fill Database Description }}</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -104,9 +104,9 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Server</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Name of the SSAS server, including instance and port if required.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -116,9 +116,9 @@
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Database</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>{{ Fill Database Description }}</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -140,7 +140,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -187,16 +187,11 @@
         <maml:name>Get-SqlPackagePath</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Version</maml:name>
-          <maml:Description>
-            <maml:para>Defines the specific version of SqlPackage.exe to which you wish to obtain the path. Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:</maml:para>
-            <maml:para>* 15: SQL Server 2019</maml:para>
-            <maml:para>* 14: SQL Server 2017</maml:para>
-            <maml:para>* 13: SQL Server 2016</maml:para>
-            <maml:para>* 12: SQL Server 2014</maml:para>
-            <maml:para>* 11: SQL Server 2012</maml:para>
-            <maml:para></maml:para>
+          <maml:description>
+            <maml:para>Defines the specific version of SqlPackage.exe to which you wish to obtain the path. Valid values for -Version are:</maml:para>
+            <maml:para>    latest = use the latest version of SqlPackage.exe     17 = SQL Server 2025     16 = SQL Server 2022     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
             <maml:para>If you are unsure which version(s) of SqlPackage.exe you have installed, use the function Find-SqlPackageLocations to obtain a full list.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -209,16 +204,11 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Version</maml:name>
-        <maml:Description>
-          <maml:para>Defines the specific version of SqlPackage.exe to which you wish to obtain the path. Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:</maml:para>
-          <maml:para>* 15: SQL Server 2019</maml:para>
-          <maml:para>* 14: SQL Server 2017</maml:para>
-          <maml:para>* 13: SQL Server 2016</maml:para>
-          <maml:para>* 12: SQL Server 2014</maml:para>
-          <maml:para>* 11: SQL Server 2012</maml:para>
-          <maml:para></maml:para>
+        <maml:description>
+          <maml:para>Defines the specific version of SqlPackage.exe to which you wish to obtain the path. Valid values for -Version are:</maml:para>
+          <maml:para>    latest = use the latest version of SqlPackage.exe     17 = SQL Server 2025     16 = SQL Server 2022     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
           <maml:para>If you are unsure which version(s) of SqlPackage.exe you have installed, use the function Find-SqlPackageLocations to obtain a full list.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -240,7 +230,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT Install SqlPackage.exe from https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage SqlPackage.exe will also be installed with Visual Studio.</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -283,9 +273,9 @@
         <maml:name>Invoke-ExternalCommand</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Command</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>The command-line or windows executable you wish to execute.  Should be a full path to the file if the executable is not in the PATH.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -295,9 +285,9 @@
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Arguments</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>An array of parameters to the passed on the command-line</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
             <maml:name>String[]</maml:name>
@@ -307,9 +297,9 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>PipeOutNull</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Windows executables are started in thier own process, so we stop this by piping the output to Out-Null;</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
             <maml:name>Boolean</maml:name>
@@ -322,9 +312,9 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Command</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>The command-line or windows executable you wish to execute.  Should be a full path to the file if the executable is not in the PATH.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -334,9 +324,9 @@
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Arguments</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>An array of parameters to the passed on the command-line</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
           <maml:name>String[]</maml:name>
@@ -346,9 +336,9 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>PipeOutNull</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Windows executables are started in thier own process, so we stop this by piping the output to Out-Null;</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
         <dev:type>
           <maml:name>Boolean</maml:name>
@@ -361,7 +351,7 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021  This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025  This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -397,9 +387,9 @@
         <maml:name>Ping-SqlDatabase</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Server</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Name of the target server, including instance and port if required.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -409,9 +399,9 @@
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Database</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>The name of the database you are checking exists.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -424,9 +414,9 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Server</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Name of the target server, including instance and port if required.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -436,9 +426,9 @@
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Database</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>The name of the database you are checking exists.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -460,7 +450,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -496,9 +486,9 @@
         <maml:name>Ping-SqlServer</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Server</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Name of the target server, including instance and port if required.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -511,9 +501,9 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Server</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Name of the target server, including instance and port if required.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -535,7 +525,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -573,9 +563,9 @@
         <maml:name>Publish-DacPac</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>DacPacPath</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Full path to your database DACPAC (e.g. C:\Dev\YourDB\bin\Debug\YourDB.dacpac)</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -583,11 +573,11 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="Username, UserID">
           <maml:name>AuthenticationUser</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>UserID for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -595,11 +585,11 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="Password">
           <maml:name>AuthenticationPassword</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Password for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -609,9 +599,9 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="12" aliases="none">
           <maml:name>EncryptConnection</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Specifies if SQL encryption should be used for the target database connection.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
           <dev:type>
             <maml:name>Boolean</maml:name>
@@ -621,9 +611,9 @@
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>DacPublishProfile</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Name of the DAC Publish Profile to be found in the same folder as your DACPAC (e.g. YourDB.CI.publish.xml) You can also provide the full path to an alternative DAC Publish Profile.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -633,9 +623,9 @@
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>Server</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Name of the target server, including instance and port if required.  Note that this overwrites the server defined in the DAC Publish Profile</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -645,9 +635,9 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>Database</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Normally, the database will be named the same as your DACPAC. However, by adding the -Database parameter, you can name the database anything you like. Note that this overwrites the database name defined in the DAC Publish Profile.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -657,13 +647,13 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>SqlCmdVariables</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>A string array containing SqlCmd variables to be updated in the DAC Publish Profile. These should be name/value pairs with no delimiters.  For example:</maml:para>
             <maml:para>    var1=varvalue1     var2=varvalue2     var3=varvalue3</maml:para>
             <maml:para>The simplest way of creating this in PowerShell is</maml:para>
             <maml:para>    [string[]]$SqlCmdVariables = @();     $SqlCmdVariables += "var1=varvalue1";     $SqlCmdVariables += "var2=varvalue2";     $SqlCmdVariables += "var3=varvalue3";</maml:para>
             <maml:para>And pass $SqlCmdVariables to the -SqlCmdVariables parameter.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
           <dev:type>
             <maml:name>String[]</maml:name>
@@ -673,10 +663,11 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>PreferredVersion</maml:name>
-          <maml:Description>
-            <maml:para>Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all. Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
-            <maml:para>    latest = use the latest version of SqlPackage.exe     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
-          </maml:Description>
+          <maml:description>
+            <maml:para>Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all. It is recommended you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
+            <maml:para>Valid values for -Version are:</maml:para>
+            <maml:para>    latest = use the latest version of SqlPackage.exe     17 = SQL Server 2025     16 = SQL Server 2022     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -686,9 +677,9 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>DeployScriptPath</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Specifies an optional file path to output the deployment script. For Azure deployments, if there are T-SQL commands to create or modify the master database, a script will be written to the same path but with "Filename_Master.sql" as the output file name. Note that providing the DeployScriptPath parameter will cause SqlPackage.exe to be called with the /Action:Script parameter and the database will NOT be deployed but scripted out.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -698,9 +689,9 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
           <maml:name>DeployReportPath</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Specifies an optional file path to output the deployment report xml file.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -710,10 +701,10 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
           <maml:name>AuthenticationMethod</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Indicates which method to use to connect to the target SQL Server instance in order to deploy the database DacPac. Valid options are:</maml:para>
             <maml:para>    windows - Windows authentication (default) will be used to deploy the DacPac to the target SQL Server instance     sqlauth - SQL Server authentication will be used to deploy the DacPac to the target SQL Server instance either on-premise or in Azure</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -726,9 +717,9 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>DacPacPath</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Full path to your database DACPAC (e.g. C:\Dev\YourDB\bin\Debug\YourDB.dacpac)</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -738,9 +729,9 @@
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>DacPublishProfile</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Name of the DAC Publish Profile to be found in the same folder as your DACPAC (e.g. YourDB.CI.publish.xml) You can also provide the full path to an alternative DAC Publish Profile.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -750,9 +741,9 @@
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>Server</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Name of the target server, including instance and port if required.  Note that this overwrites the server defined in the DAC Publish Profile</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -762,9 +753,9 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>Database</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Normally, the database will be named the same as your DACPAC. However, by adding the -Database parameter, you can name the database anything you like. Note that this overwrites the database name defined in the DAC Publish Profile.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -774,13 +765,13 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>SqlCmdVariables</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>A string array containing SqlCmd variables to be updated in the DAC Publish Profile. These should be name/value pairs with no delimiters.  For example:</maml:para>
           <maml:para>    var1=varvalue1     var2=varvalue2     var3=varvalue3</maml:para>
           <maml:para>The simplest way of creating this in PowerShell is</maml:para>
           <maml:para>    [string[]]$SqlCmdVariables = @();     $SqlCmdVariables += "var1=varvalue1";     $SqlCmdVariables += "var2=varvalue2";     $SqlCmdVariables += "var3=varvalue3";</maml:para>
           <maml:para>And pass $SqlCmdVariables to the -SqlCmdVariables parameter.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
         <dev:type>
           <maml:name>String[]</maml:name>
@@ -790,10 +781,11 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>PreferredVersion</maml:name>
-        <maml:Description>
-          <maml:para>Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all. Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
-          <maml:para>    latest = use the latest version of SqlPackage.exe     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
-        </maml:Description>
+        <maml:description>
+          <maml:para>Defines the preferred version of SqlPackage.exe you wish to use.  Use 'latest' for the latest version, or do not provide the parameter at all. It is recommended you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.</maml:para>
+          <maml:para>Valid values for -Version are:</maml:para>
+          <maml:para>    latest = use the latest version of SqlPackage.exe     17 = SQL Server 2025     16 = SQL Server 2022     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -803,9 +795,9 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>DeployScriptPath</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Specifies an optional file path to output the deployment script. For Azure deployments, if there are T-SQL commands to create or modify the master database, a script will be written to the same path but with "Filename_Master.sql" as the output file name. Note that providing the DeployScriptPath parameter will cause SqlPackage.exe to be called with the /Action:Script parameter and the database will NOT be deployed but scripted out.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -815,9 +807,9 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="8" aliases="none">
         <maml:name>DeployReportPath</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Specifies an optional file path to output the deployment report xml file.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -827,10 +819,10 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="9" aliases="none">
         <maml:name>AuthenticationMethod</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Indicates which method to use to connect to the target SQL Server instance in order to deploy the database DacPac. Valid options are:</maml:para>
           <maml:para>    windows - Windows authentication (default) will be used to deploy the DacPac to the target SQL Server instance     sqlauth - SQL Server authentication will be used to deploy the DacPac to the target SQL Server instance either on-premise or in Azure</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -838,11 +830,11 @@
         </dev:type>
         <dev:defaultValue>Windows</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="10" aliases="Username, UserID">
         <maml:name>AuthenticationUser</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>UserID for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -850,11 +842,11 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="11" aliases="Password">
         <maml:name>AuthenticationPassword</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Password for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -864,9 +856,9 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="12" aliases="none">
         <maml:name>EncryptConnection</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Specifies if SQL encryption should be used for the target database connection.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
         <dev:type>
           <maml:name>Boolean</maml:name>
@@ -879,7 +871,7 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -937,9 +929,9 @@
         <maml:name>Remove-Database</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Server</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Name of the target server, including instance and port if required.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -949,9 +941,9 @@
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Database</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>The name of the database to be deleted.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -961,10 +953,10 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>AuthenticationMethod</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Indicates which method to use to connect to the target SQL Server instance in order to deploy the database DacPac. Valid options are:</maml:para>
             <maml:para>    windows    - Windows authentication (default) will be used to deploy the DacPac to the target SQL Server instance     sqlauth    - SQL Server authentication will be used to deploy the DacPac to the target SQL Server instance     credential - Use a PSCredential to connect to the SQL Server instance</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -972,11 +964,11 @@
           </dev:type>
           <dev:defaultValue>Windows</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="Username, UserID">
           <maml:name>AuthenticationUser</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>UserID for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -984,11 +976,11 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="Password">
           <maml:name>AuthenticationPassword</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>Password for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -998,9 +990,9 @@
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>AuthenticationCredential</maml:name>
-          <maml:Description>
+          <maml:description>
             <maml:para>A PSCredential object containing the credentials to connect to the SQL Server instance Only required if AuthenticationMethod = credential</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
           <dev:type>
             <maml:name>PSCredential</maml:name>
@@ -1008,14 +1000,26 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+          <maml:name>TrustServerCertificate</maml:name>
+          <maml:description>
+            <maml:para>If set to $true, the connection to the SQL Server instance will trust the server certificate. This is useful if you are using a self-signed certificate for the SQL Server instance.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+          <dev:type>
+            <maml:name>Boolean</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>True</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Server</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Name of the target server, including instance and port if required.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -1025,9 +1029,9 @@
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Database</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>The name of the database to be deleted.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -1037,10 +1041,10 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>AuthenticationMethod</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Indicates which method to use to connect to the target SQL Server instance in order to deploy the database DacPac. Valid options are:</maml:para>
           <maml:para>    windows    - Windows authentication (default) will be used to deploy the DacPac to the target SQL Server instance     sqlauth    - SQL Server authentication will be used to deploy the DacPac to the target SQL Server instance     credential - Use a PSCredential to connect to the SQL Server instance</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -1048,11 +1052,11 @@
         </dev:type>
         <dev:defaultValue>Windows</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="Username, UserID">
         <maml:name>AuthenticationUser</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>UserID for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -1060,11 +1064,11 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="Password">
         <maml:name>AuthenticationPassword</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>Password for the AuthenticationUser Only required if AuthenticationMethod = sqlauth</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -1074,9 +1078,9 @@
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>AuthenticationCredential</maml:name>
-        <maml:Description>
+        <maml:description>
           <maml:para>A PSCredential object containing the credentials to connect to the SQL Server instance Only required if AuthenticationMethod = credential</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
         <dev:type>
           <maml:name>PSCredential</maml:name>
@@ -1084,12 +1088,33 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
+        <maml:name>TrustServerCertificate</maml:name>
+        <maml:description>
+          <maml:para>If set to $true, the connection to the SQL Server instance will trust the server certificate. This is useful if you are using a self-signed certificate for the SQL Server instance.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>True</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes />
-    <command:returnValues />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Returns $true if the database is deleted, $false otherwise.</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -1133,11 +1158,11 @@
         <maml:name>Select-SqlPackageVersion</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>PreferredVersion</maml:name>
-          <maml:Description>
-            <maml:para>Defines the preferred version of SqlPackage.exe you wish to find.  Use 'latest' for the latest version, or do not provide the parameter. Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:</maml:para>
-            <maml:para>    latest = use the latest version of SqlPackage.exe     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
+          <maml:description>
+            <maml:para>Defines the preferred version of SqlPackage.exe you wish to find.  Use 'latest' for the latest version, or do not provide the parameter. Valid values for -Version are:</maml:para>
+            <maml:para>    latest = use the latest version of SqlPackage.exe     17 = SQL Server 2025     16 = SQL Server 2022     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
             <maml:para>If you are unsure which version(s) of SqlPackage.exe you have installed, use the function Find-SqlPackageLocations to obtain a full list.</maml:para>
-          </maml:Description>
+          </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
@@ -1150,11 +1175,11 @@
     <command:parameters>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>PreferredVersion</maml:name>
-        <maml:Description>
-          <maml:para>Defines the preferred version of SqlPackage.exe you wish to find.  Use 'latest' for the latest version, or do not provide the parameter. Valid values for -Version are: ('15', '14', '13', '12', '11') which translate as follows:</maml:para>
-          <maml:para>    latest = use the latest version of SqlPackage.exe     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
+        <maml:description>
+          <maml:para>Defines the preferred version of SqlPackage.exe you wish to find.  Use 'latest' for the latest version, or do not provide the parameter. Valid values for -Version are:</maml:para>
+          <maml:para>    latest = use the latest version of SqlPackage.exe     17 = SQL Server 2025     16 = SQL Server 2022     15 = SQL Server 2019     14 = SQL Server 2017     13 = SQL Server 2016     12 = SQL Server 2014     11 = SQL Server 2012</maml:para>
           <maml:para>If you are unsure which version(s) of SqlPackage.exe you have installed, use the function Find-SqlPackageLocations to obtain a full list.</maml:para>
-        </maml:Description>
+        </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
@@ -1176,7 +1201,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
+        <maml:para>Written by (c) Dr. John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT</maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>

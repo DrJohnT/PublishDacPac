@@ -1,4 +1,5 @@
-﻿# How to format results https://devblogs.microsoft.com/scripting/psscriptanalyzer-deep-dive-part-3-of-4/
+﻿# https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/overview?view=ps-modules
+# How to format results https://devblogs.microsoft.com/scripting/psscriptanalyzer-deep-dive-part-3-of-4/
 
 # Install module using: 
 # Install-Module -Name PSScriptAnalyzer -Force

@@ -68,14 +68,19 @@ function Get-SqlPackagePath {
     [string] $ExeName = "SqlPackage.exe";
     [string] $SqlPackageExePath = $null;
     $Version = $Version.Substring(0,2);
-    [System.Management.Automation.PathInfo[]]$PathsToSearch = Resolve-Path -Path "${env:ProgramFiles}\Microsoft SQL Server\*\DAC\bin" -ErrorAction SilentlyContinue;
+    [System.Management.Automation.PathInfo[]]$PathsToSearch; 
+    # 64-bit paths
+    $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles}\Microsoft SQL Server\*\DAC\bin" -ErrorAction SilentlyContinue;
+    $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles}\Microsoft Visual Studio\*\*\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\" -ErrorAction SilentlyContinue;
+    $PathsToSearch += Resolve-Path -Path "${env:USERPROFILE}\.dotnet\tools" -ErrorAction SilentlyContinue;    
     $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles}\Microsoft SQL Server\*\Tools\Binn" -ErrorAction SilentlyContinue;
-    $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles(x86)}\Microsoft SQL Server\*\Tools\Binn" -ErrorAction SilentlyContinue;
+    # 32-bit paths
     $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles(x86)}\Microsoft SQL Server\*\DAC\bin" -ErrorAction SilentlyContinue;
+    $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles(x86)}\Microsoft SQL Server\*\Tools\Binn" -ErrorAction SilentlyContinue;
     $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio *\Common7\IDE\Extensions\Microsoft\SQLDB\DAC" -ErrorAction SilentlyContinue;
     $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\" -ErrorAction SilentlyContinue;    
-    $PathsToSearch += Resolve-Path -Path "${env:ProgramFiles}\Microsoft Visual Studio\*\*\Common7\IDE\Extensions\Microsoft\SQLDB\DAC\" -ErrorAction SilentlyContinue;    
 
+        
     # For those that install SQLPackage.exe in a completely different location, set environment variable CustomSqlPackageInstallLocation
     $CustomInstallLocation = [Environment]::GetEnvironmentVariable('CustomSqlPackageInstallLocation');
     if ("$CustomInstallLocation" -ne "") {
@@ -89,15 +94,15 @@ function Get-SqlPackagePath {
     }
 
     foreach ($SqlPackageExe in $SqlPackageExes) {
-        $ExePath = $SqlPackageExe.FullName;
         [string] $ProductVersion = $SqlPackageExe.VersionInfo.ProductVersion.Substring(0,2);      
         
         if ($ProductVersion -eq $Version) {
-            $SqlPackageExePath = $ExePath;
+            $SqlPackageExePath = $SqlPackageExe.FullName;
             Write-Verbose "$ExeName version $Version found here: $SqlPackageExePath";       
             break;
         }            
     }
+    
     return $SqlPackageExePath;
 }
 

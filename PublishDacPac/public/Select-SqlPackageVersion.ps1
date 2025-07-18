@@ -81,8 +81,8 @@ function Select-SqlPackageVersion {
             Write-Information "SQLPackage.exe version '$PreferredVersion' not found.";
         }
         else {
-            Write-Warning ("SQLPackage was not found on the build agent server. Try installing Microsoft SQL Server Data-Tier Application Framework");
-            Write-Warning ("For install instructions, see https://www.microsoft.com/en-us/download/details.aspx?id=57784/");
+            Write-Warning ("SQLPackage was not found on the build agent server.");
+            Write-Warning ("For install instructions, see https://learn.microsoft.com/en-us/sql/tools/sqlpackage/sqlpackage");
         }
     }
     catch {

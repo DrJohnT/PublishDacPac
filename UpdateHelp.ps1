@@ -1,3 +1,6 @@
+# Requires module platyPS
+#   install-module platyPS
+
 if (Get-Module -Name PublishDacPac) {
     Remove-Module PublishDacPac
 }

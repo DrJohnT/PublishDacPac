@@ -169,9 +169,13 @@ Accept wildcard characters: False
 ### -PreferredVersion
 Defines the preferred version of SqlPackage.exe you wish to use. 
 Use 'latest' for the latest version, or do not provide the parameter at all.
-Recommed you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
+It is recommended you use the latest version of SqlPackage.exe as this will deploy to all previous version of SQL Server.
+
+Valid values for -Version are:
 
     latest = use the latest version of SqlPackage.exe
+    17 = SQL Server 2025
+    16 = SQL Server 2022
     15 = SQL Server 2019
     14 = SQL Server 2017
     13 = SQL Server 2016
@@ -248,7 +252,7 @@ Only required if AuthenticationMethod = sqlauth
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Username, UserID
 
 Required: False
 Position: 10
@@ -264,7 +268,7 @@ Only required if AuthenticationMethod = sqlauth
 ```yaml
 Type: String
 Parameter Sets: (All)
-Aliases:
+Aliases: Password
 
 Required: False
 Position: 11
@@ -297,7 +301,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 Written by (c) Dr.
-John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
 This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS

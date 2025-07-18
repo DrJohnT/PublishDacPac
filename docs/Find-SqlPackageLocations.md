@@ -40,7 +40,7 @@ Simply lists all instances of SqlPackage.exe on the host machine
 ### Output is written to standard output.
 ## NOTES
 Written by (c) Dr.
-John Tunnicliffe, 2019-2021 https://github.com/DrJohnT/PublishDacPac
+John Tunnicliffe, 2019-2025 https://github.com/DrJohnT/PublishDacPac
 This PowerShell script is released under the MIT license http://www.opensource.org/licenses/MIT
 
 ## RELATED LINKS
