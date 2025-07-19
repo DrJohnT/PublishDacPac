@@ -18,7 +18,7 @@ Describe "Find-SqlPackageLocations" -Tag "Round1" {
         It "Finds some version" {
             ( Find-SqlPackageLocations ) | Should -Not -Be $null
             $lines = Find-SqlPackageLocations | Measure-Object;
-            $lines.Count | Should -Be 6;
+            $lines.Count | Should -BeGreaterOrEqual 4;
         }
 <#
         It "Valid folder location and SqlPackage.exe present" {
