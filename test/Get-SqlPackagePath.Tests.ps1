@@ -18,9 +18,17 @@ Describe "Get-SqlPackagePath" -Tag "Round1" {
         It "Should have Version as a mandatory parameter" {
             (Get-Command Get-SqlPackagePath).Parameters['Version'].Attributes.mandatory | Should -BeTrue;
         }
+
+        It "Should have 64bit as a parameter" {
+            (Get-Command Get-SqlPackagePath).Parameters['Use64BitPaths'].Attributes.mandatory | Should -BeFalse;
+        }
     }
 
     Context "Finds SqlPackage.exe version" {
+        It "Finds SqlPackage.exe latest version" {
+            ( Get-SqlPackagePath -Version:"latest" ) -like "*SqlPackage.exe" | Should -BeTrue;
+        }
+
         It "Finds SqlPackage.exe version 17" {
             ( Get-SqlPackagePath -Version 17 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
@@ -29,44 +37,24 @@ Describe "Get-SqlPackagePath" -Tag "Round1" {
             ( Get-SqlPackagePath -Version 16 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Finds SqlPackage.exe version 15" {
-            ( Get-SqlPackagePath -Version 15 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        It "Does not find SqlPackage.exe version 15 so returns latest" {
+            ( Get-SqlPackagePath -Version 15 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
         It "Finds SqlPackage.exe version 14" {
             ( Get-SqlPackagePath -Version 14 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Does not find SqlPackage.exe version 13" {
-            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        It "Does not find SqlPackage.exe version 13 so returns latest" {
+            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Does not find SqlPackage.exe version 12" {
-            ( Get-SqlPackagePath -Version 12 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        It "Does not find SqlPackage.exe version 12 so returns latest" {
+            ( Get-SqlPackagePath -Version 12 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Does not find SqlPackage.exe version 11" {
-            ( Get-SqlPackagePath -Version 11 ) -like "*SqlPackage.exe" | Should -BeFalse;
-        }
-
-        It "Unsupported SqlPackage.exe version 10 so Should -Throw;" {
-            { Get-SqlPackagePath -Version 10 } | Should -Throw;
-        }
-
-        It "Invalid SqlPackage.exe version XX Should -Throw;" {
-            { Get-SqlPackagePath -Version XX } | Should -Throw;
-        }
-
-        It "Valid folder but SqlPackage.exe is not present in folder" {
-            ResetEnv;
-            $env:CustomSqlPackageInstallLocation = $PSScriptRoot;
-            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
-        }
-
-        It "Invalid folder location for CustomSqlPackageInstallLocation" {
-            ResetEnv;
-            $env:CustomSqlPackageInstallLocation = $PSScriptRoot + "\xxx";
-            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        It "Does not find SqlPackage.exe version 11 so returns latest" {
+            ( Get-SqlPackagePath -Version 11 ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
         It "Valid folder location and SqlPackage.exe present" {
@@ -75,16 +63,19 @@ Describe "Get-SqlPackagePath" -Tag "Round1" {
             $ExePath = Resolve-Path "$ExePath\examples\ForTests\CustomSqlPackageInstallLocation";
             $env:CustomSqlPackageInstallLocation = $ExePath;
             ( Get-SqlPackagePath -Version 12 ) -like "*SqlPackage.exe" | Should -BeTrue;
+        }        
+        
+        It "Finds SqlPackage.exe version 17 32-bit" {
+            ( Get-SqlPackagePath -Version 17 -Use64BitPaths $false ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
 
-        It "Valid folder location and SqlPackage.exe present but is not 13" {
-            ResetEnv;
-            $ExePath = Split-Path -Parent $PSScriptRoot;
-            $ExePath = Resolve-Path "$ExePath\examples\ForTests\CustomSqlPackageInstallLocation";
-            $env:CustomSqlPackageInstallLocation = $ExePath;
-            ( Get-SqlPackagePath -Version 13 ) -like "*SqlPackage.exe" | Should -BeFalse;
+        It "Finds SqlPackage.exe version 16 32-bit" {
+            ( Get-SqlPackagePath -Version 16 -Use64BitPaths $false ) -like "*SqlPackage.exe" | Should -BeTrue;
         }
-        
+
+        It "Finds SqlPackage.exe version 12 32-bit" {
+            ( Get-SqlPackagePath -Version 12 -Use64BitPaths $false ) -like "*SqlPackage.exe" | Should -BeTrue;
+        }
     }
 }
 

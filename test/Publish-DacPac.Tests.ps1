@@ -78,7 +78,6 @@ Describe "Publish-DacPac" -Tag "Round1" {
         It "Invalid SqlPackagePath path" {
             $data = Get-ConfigData;
             Mock -ModuleName PublishDacPac Get-SqlPackagePath { return "NoSqlPackage" };
-            Mock -ModuleName PublishDacPac Select-SqlPackageVersion { return 15 };
             { Publish-DacPac -DacPacPath $data.DacPacPath -DacPublishProfile $data.DacProfile -Server $data.Server -Database "MyTestDB" -PreferredVersion latest } | Should -Throw;
         }
     }

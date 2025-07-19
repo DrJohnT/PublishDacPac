@@ -59,7 +59,6 @@ FunctionsToExport = @(
     'Ping-SqlDatabase',
     'Ping-SqlServer',
     'Publish-DacPac',
-    'Select-SqlPackageVersion',
     'Remove-Database'
 )
 

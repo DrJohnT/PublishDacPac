@@ -172,8 +172,7 @@
             $PreferredVersion = 'latest';
         }
         # find the specific version of SqlPackage or the latest if not available
-        $Version = Select-SqlPackageVersion -PreferredVersion $PreferredVersion;
-        [string]$SqlPackageExePath = Get-SqlPackagePath -Version $Version;
+        [string]$SqlPackageExePath = Get-SqlPackagePath -Version $PreferredVersion;
         $SqlPackageExePath = $SqlPackageExePath.Trim(); # remove any whitespace before / after the path
 
         if (!(Test-Path -Path $SqlPackageExePath)) {
